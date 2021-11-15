@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Loop</title>
+    <style>
+        .left {
+            width: 100px;
+            height: 200px;
+            background: red;
+            float: left;
+        }
+
+        .right {
+            height: 300px;
+            background: blue;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="demo">
+        <div class="left"></div>
+        <div class="right"></div>
+
+    </div>
+    <script type="text/javascript">
+        var foo = {},
+            F = function () { };
+        Object.prototype.a = 'value a';
+        Function.prototype.b = 'value b';
+
+        console.log(foo.a)//value a
+        console.log(foo.b)//undefine
+        console.log(F.a)//undefie
+        console.log(F.b)//value b
+
+
+    </script>
+</body>
+
+</html>

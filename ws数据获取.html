@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="message">
+    <button onclick="sendMessage()">测试</button>
+    <span id="detail"></span>
+</body>
+<script>
+    var ws = new WebSocket("ws://localhost:30002");
+    ws.onopen = function (e) {
+        console.log('ws连接成功');
+    }
+    ws.onmessage = function (e) {
+        var vnode = document.querySelector('#detail');
+        console.log('收到的信息 ', e.data);
+        vnode.innerHTML = e.data
+    }
+
+    function sendMessage() {
+        var val = document.querySelector('#message').value;
+        console.log(val)
+        /* 给服务端,发送信息 */
+        ws.send(val);
+    }
+</script>
+
+</html>

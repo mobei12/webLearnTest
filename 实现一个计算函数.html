@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script type="text/javascript">
+
+    function calculate() {
+        const args = Array.prototype.slice.call(arguments);
+        const fn = function () {
+            var arg_fn = Array.prototype.slice.call(arguments);
+            return calculate.apply(null, args.concat(arg_fn));
+        }
+        fn.valueOf = function () {
+            let sIndex = args.length - 1;
+            let sArgs = args.slice(0, sIndex);
+            switch (args[sIndex]) {
+                case '-':
+                    return sArgs.reduce((a, b) => a - b);
+                case '*':
+                    return sArgs.reduce((a, b) => a * b);
+                case '+':
+                    return sArgs.reduce((a, b) => a + b);
+                case '/':
+                    return sArgs.reduce((a, b) => a / b);
+                default:
+                    return sArgs.reduce((a, b) => a + b);
+            }
+        }
+        return fn;
+    }
+    let s = calculate(1)(2)("+");
+    // function
+    //console.log(typeof s);
+    console.log(s);
+    // 15
+    console.log(Number(s));
+
+
+</script>
+
+</html>

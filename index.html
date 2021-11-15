@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script type="text/javascript" src="/lib/vue.js"></script>
+	<style>
+		html {
+			height: 100%;
+			background: #4a4747;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="app">
+		{{a}}
+		<abc></abc>
+		{{ads}}
+		<span v-cacl="number">1123</span>
+	</div>
+</body>
+<script type="text/javascript">
+	Vue.config.productionTip = false;
+	const abc = Vue.extend({
+		template: "<a>{{hah}}</a>",
+		data() {
+			return { hah: 12213 };
+		}
+	});
+	Vue.component('baseInput', {
+		render: function (createElement) {
+			return createElement('input');
+		},
+		props: ['value']
+	})
+	console.log(Vue.components)
+	const vm = new Vue({
+		el: "#app",
+		components: {
+			abc
+		},
+		data: {
+			number: 123,
+			a: 123,
+			b: {
+				a: 123332
+			}
+		},
+		directives: {
+			/* 自定义指令 */
+			mymodel(el, binding, vNod) {
+				el.style.backgroundColor = '#ccc'
+				el.value = binding.value;
+			},
+			cacl: {
+				bind(el, binding, vNod) {
+					el.style.backgroundColor = '#ccc'
+					el.value = binding.value;
+				},
+				update(el, binding, vNod) {
+					el.style.backgroundColor = '#ccc'
+					el.value = binding.value;
+				},
+				inserted(el, binding, vNod) {
+					el.style.backgroundColor = '#ccc'
+					el.value = binding.value;
+				},
+			}
+		},
+		computed: {
+			ads: {
+				get: function () {
+					return this.a + 10;
+				},
+				set: function () {
+					this.a = - 1;
+				}
+			}
+		}
+	});
+	console.log(vm)
+	//vm.a = 'aaaaa'
+	//console.log(vm.$el.innerHTML)
+	Vue.nextTick(function () {
+		//console.log(vm.$el.innerHTML)
+	})
+</script>
+
+</html>

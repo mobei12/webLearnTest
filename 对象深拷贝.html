@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script type="text/javascript">
+    /* 深拷贝相关 */
+    function isObject(val) {
+        return typeof val === "object" && val !== null;
+    }
+
+    function deepClone(obj, hash = new WeakMap()) {
+        if (!isObject(obj)) return obj;
+        if (hash.has(obj)) {
+            return hash.get(obj);
+        }
+        let target = Array.isArray(obj) ? [] : {};
+        hash.set(obj, target);
+        Reflect.ownKeys(obj).forEach((item) => {
+            if (isObject(obj[item])) {
+                target[item] = deepClone(obj[item], hash);
+            } else {
+                target[item] = obj[item];
+            }
+        });
+
+        return target;
+    }
+
+// var obj1 = {
+// a:1,
+// b:{a:2}
+// };
+// var obj2 = deepClone(obj1);
+// console.log(obj1);
+</script>
+
+</html>
