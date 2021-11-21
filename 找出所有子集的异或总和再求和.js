@@ -11,17 +11,21 @@
 
 */
 
-var arr = [3, 4, 5, 6, 7, 8];
+let arr = [5, 1, 6];
 function getsubset(arr) {
-	var result = [[]];
-	for (var i = 0; i < arr.length; i++) {
-		var temp = [];
-		for (var j = 0; j < result.length; j++) {
+	let result = [[]];
+	let number = 0;
+	for (let i = 0; i < arr.length; i++) {
+		let temp = [];
+		for (let j = 0; j < result.length; j++) {
 			temp.push(result[j].concat(arr[i]));
+			if (temp.length > 0) {
+				number += temp[temp.length - 1].reduce((a, b) => (a ^= b), 0);
+			}
 		}
 		result = result.concat(temp);
 	}
-	return result;
+	return number;
 }
 /**
 @param {Array} arr
