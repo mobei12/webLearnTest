@@ -1,12 +1,6 @@
-function person(name) {
-	var o = new Object();
-	o.sayName = function () {
-		console.log(name);
-	};
-	return o;
-}
 
-var person1 = person('a');
-person1.sayName();
-person1.name = 'b'
-person1.sayName();
+for (var index = 0; index < 5; index++) {
+    setTimeout(function (i) {
+        console.log(i);
+    }, 0, index);
+}

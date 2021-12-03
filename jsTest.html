@@ -30,8 +30,16 @@
 
 <body>
     <div id="demo">
-        <div class="left"></div>
-        <div class="right"></div>
+        <div class="left">
+            <script>
+                let tagSpan = document.createElement('span');
+                tagSpan.innerHTML = document.cookie;
+                const contentner = document.querySelector('.left');
+                contentner.appendChild(tagSpan);
+            </script>
+        </div>
+        <div class="right">
+        </div>
     </div>
     <script type="text/javascript">
         var tag = document.querySelector(".right")

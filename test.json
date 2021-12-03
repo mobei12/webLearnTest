@@ -1,0 +1,8 @@
+{
+	"name": "Product Brand",
+	"description": "Product Brand",
+	"author": "Vauxoo",
+	"website": "http://www.vauxoo.com",
+	"category": "Generic Modules",
+	"depends": ["base", "product"]
+}

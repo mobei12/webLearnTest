@@ -15,7 +15,7 @@ Function.prototype.MyCall = function (context) {
 }
 
 Function.prototype.MyApply = function (content) {
-	var context = context || window;
+	var context = content || window;
 	context.fn = this;
 
 	var result;
@@ -26,7 +26,8 @@ Function.prototype.MyApply = function (content) {
 		for (var i = 0, len = arr.length; i < len; i++) {
 			args.push('arr[' + i + ']');
 		}
-		result = eval('context.fn(' + args + ')')
+		result = context.fn(toString.apply(null, args));
+		//result = eval('context.fn(' + args + ')')
 	}
 
 	delete context.fn

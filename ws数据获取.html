@@ -20,7 +20,7 @@
     }
     ws.onmessage = function (e) {
         var vnode = document.querySelector('#detail');
-        console.log('收到的信息 ', e.data);
+        console.log('收到的信息 ', JSON.parse(e.data));
         vnode.innerHTML = e.data
     }
 
