@@ -15,21 +15,19 @@
  *****
   ***
    * */
-
 function renderDiamond(n) {
-	let a = "",
-		b = "*";
-	for (let i = 0; i < n; i++) {
-		if (i === 0) {
-			a = b;
+	var result = "";
+	for (let i = 1; i < 2 * n; i = i + 2) {
+		if (i <= n) {
+			var spaces = " ".repeat((n - i) / 2);
+			var stars = "*".repeat(i);
+			result += spaces + stars + "\n";
 		} else {
-			if (i < (n + 1) / 2) {
-				a = a + b + b;
-			} else {
-				a = a.substr(0, a.length - 2);
-			}
+			var spaces = " ".repeat((i - n) / 2);
+			var stars = "*".repeat(n * 2 - i);
+			result += spaces + stars + "\n";
 		}
-		console.log(a);
 	}
+	console.log(result);
 }
 renderDiamond(7);
