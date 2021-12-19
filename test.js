@@ -1,17 +1,19 @@
-function renderDiamond(n) {
-	var result = "";
-	for (var i = 0; i < n; i = i + 2) {
-		var spaces = " ".repeat((n - i) / 2);
-		var stars = "*".repeat(1 * i + 1);
-		result += spaces + stars + "\n";
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isValid = function (s) {
+	let stack = [];
+	for (let i = 0; i < s.length; i++) {
+		if (s[i] === "(" || s[i] === "[" || s[i] === "{") {
+			stack.push(s[i]);
+		} else {
+			if (stack.length === 0) return false;
+			let top = stack.pop();
+			if (s[i] === ")" && top !== "(") return false;
+			if (s[i] === "]" && top !== "[") return false;
+			if (s[i] === "}" && top !== "{") return false;
+		}
 	}
-	for (var i = n - 2; i >= 0; i = i - 2) {
-		var spaces = " ".repeat((n - i) / 2);
-		var stars = "*".repeat(i);
-		result += spaces + stars + "\n";
-	}
-	console.log(result);
-}
-renderDiamond(7);
-let a = "123";
-console.log(a.repeat(5));
+	return stack.length === 0;
+};

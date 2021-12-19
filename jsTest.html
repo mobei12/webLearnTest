@@ -44,8 +44,9 @@
     <script type="text/javascript">
         var tag = document.querySelector(".right")
         tag.innerHTML = '123'
-        const array = new Uint8Array(11)
-        console.log(window.crypto.getRandomValues(array))
+        const tagFragment = document.createDocumentFragment()
+        //tagFragment.appendChild(tag)
+        //document.body.appendChild(tagFragment)
     </script>
 </body>
 
