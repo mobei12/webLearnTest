@@ -1,8 +1,52 @@
 {
-	"name": "Product Brand",
-	"description": "Product Brand",
-	"author": "Vauxoo",
-	"website": "http://www.vauxoo.com",
-	"category": "Generic Modules",
-	"depends": ["base", "product"]
+	"component": "dcv-table",
+	"data": {
+		"head": [
+			{
+				"title": "序号",
+				"key": "index"
+			},
+			{
+				"title": "审批单位",
+				"key": "name"
+			}
+		],
+		"body": [
+			{
+				"index": 1,
+				"name": "示范区审批局"
+			},
+			{
+				"index": 2,
+				"name": "杨陵区审批局"
+			},
+			{
+				"index": 3,
+				"name": "市场监管理局"
+			},
+			{
+				"index": 4,
+				"name": "税务局"
+			},
+			{
+				"index": 5,
+				"name": "住建局"
+			},
+			{
+				"index": 6,
+				"name": "公安局"
+			},
+			{
+				"index": 7,
+				"name": "人社局"
+			},
+			{
+				"index": 8,
+				"name": "城管局"
+			}
+		]
+	},
+	"doc": "进驻审批单位",
+	"model": "模型类型 使用的模型类型",
+	"title": "进驻审批单位"
 }

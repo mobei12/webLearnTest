@@ -12,6 +12,19 @@
 			height: 100%;
 			background: #4a4747;
 		}
+
+		.list {
+			width: 100%;
+			display: flex;
+			gap: 1rem .5%;
+			flex-wrap: wrap;
+		}
+
+		.list>div {
+			height: 50px;
+			background: #000;
+			width: 33%;
+		}
 	</style>
 </head>
 
@@ -21,6 +34,9 @@
 		<abc></abc>
 		{{ads}}
 		<span v-cacl="number">1123</span>
+		<div class="list">
+			<div v-for="(item, index) in 10" :key="index"></div>
+		</div>
 	</div>
 </body>
 <script type="text/javascript">
