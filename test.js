@@ -1,25 +1,31 @@
-var matrix = [[1], [4]],
-	target = 2;
 /**
- * @param {number[][]} matrix
- * @param {number} target
- * @return {boolean}
+ * @param {number[]} numbers
+ * @return {number}
  */
-var searchMatrix = function (matrix, target) {
-	if (!matrix || !matrix.length || !matrix[0] || !matrix[0].length) {
-		return false;
-	}
-	var row = 0,
-		col = matrix[0].length - 1;
-	while (row < matrix.length && col >= 0) {
-		if (matrix[row][col] === target) {
-			return true;
-		} else if (matrix[row][col] > target) {
-			col--;
-		} else {
-			row++;
-		}
-	}
-	return false;
+ var findShortestSubArray = function(nums) {
+    const mp = {};
+
+    for (const [i, num] of nums.entries()) {
+        if (num in mp) {
+            mp[num][0]++;
+            mp[num][2] = i;
+        } else {
+            mp[num] = [1, i, i];
+        }
+    }
+    console.log(Object.values(mp))
+    let maxNum = 0, minLen = 0;
+    for (const [count, left, right] of Object.values(mp)) {
+        if (maxNum < count) {
+            maxNum = count;
+            minLen = right - left + 1;
+        } else if (maxNum === count) {
+            if (minLen > (right - left + 1)) {
+                minLen = right - left + 1;
+            }
+        }
+    }
+    return minLen;
 };
-console.log(searchMatrix(matrix, target));
+
+console.log(findShortestSubArray([1,2,2,3,1]))
