@@ -1,10 +1,13 @@
-/**
- * @param {string[]} words
- * @return {string}
- */
- var longestWord = function(words) {
+const fs  = require('fs');
 
-};
-const words = ["w","wo","wor","worl", "world"]
-console.log(longestWord(words))
-longestWord()
+const promise = new Promise((resolve,reject)=>{
+    fs.readFile('./README.md',(err,data)=>{
+        if(err) reject(err);
+        resolve(data);
+    })
+})
+promise.then((data)=>{
+    console.log(data.toString());
+},(err)=>{
+    console.log(err);
+})

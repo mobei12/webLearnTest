@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./promise.js"></script>
+</head>
+
+<body>
+    <input type="text" placeholder="admin" class="input">
+    <script>
+        let pro = new MyPromise(function (resolve, reject) {
+            setTimeout(() => {
+                resolve('success');
+            }, 1000);
+        });
+
+        pro.then(val => {
+            console.log(`val:${val}`);
+        }, err => {
+            console.log(`err:${err}`);
+        });
+    </script>
+
+</body>
+
+</html>
