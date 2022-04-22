@@ -17,4 +17,12 @@ function es5flatten(arr) {
 	}
 	return result;
 }
-console.log(es5flatten(arr));
+function reduceFlatten(arr) {
+	return arr.reduce((prev, curr) => {
+		if (curr instanceof Array) {
+			return prev.concat(reduceFlatten(curr));
+		} else {
+			return prev.concat(curr);
+		}
+	}, []);
+}
