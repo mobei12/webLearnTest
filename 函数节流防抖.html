@@ -1,105 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+	<body>
+		<div id="main">
+			<input type="text" id="inputDom" />
+		</div>
+	</body>
+	<script type="text/javascript">
+		var input = document.getElementById('inputDom');
+		input.oninput = fd(ajax, 2000, true);
+		/**
+		 * @description 函数防抖
+		 * @param {Function} fn 要调用的函数
+		 * @param {Number} delay 延迟时间
+		 * @param {boolean}  immediate 首次不延迟
+		 */
+		function fd(fn, delay, immediate) {
+			var timer = null;
+			return function () {
+				var args = [...arguments];
+				if (timer) {
+					clearTimeout(timer);
+				}
+				if (immediate) {
+					var now = !timer;
+					timer = setTimeout(() => {
+						timer = null;
+					}, delay);
+					if (now) {
+						fn.apply(this, args);
+					}
+				} else {
+					timer = setTimeout(() => {
+						fn.apply(this, args);
+					}, delay);
+				}
+			};
+		}
+		/**
+		 * @desc 函数节流
+		 * @param func 函数
+		 * @param wait 延迟执行毫秒数
+		 * @param type 1 表时间戳版，2 表定时器版
+		 */
+		function throttle(func, wait, type) {
+			if (type === 1) {
+				let previous = 0;
+			} else if (type === 2) {
+				let timeout;
+			}
+			return function () {
+				let context = this;
+				let args = arguments;
+				if (type === 1) {
+					let now = Date.now();
 
-<body>
-    <div id="main">
-        <input type="text" id="inputDom">
-    </div>
-</body>
-<script type="text/javascript">
-    var input = document.getElementById('inputDom');
-    input.oninput = fd(ajax, 2000, true);
-    /**
-     * @description 函数防抖
-     * @param {Function} fn 要调用的函数
-     * @param {Number} dely 延迟时间 
-     * @param {boolean}  immediatel 首次不延迟
-     */
-    function fd(fn, dely, immediatel) {
-        var timer = null;
-        return function () {
-            var args = [...arguments]
-            if (timer) {
-                clearTimeout(timer)
-            }
-            if (immediatel) {
-                var now = !timer
-                timer = setTimeout(() => {
-                    timer = null
-                }, dely)
-                if (now) {
-                    fn.apply(this, args);
-                }
-            } else {
-                timer = setTimeout(() => {
-                    fn.apply(this, args);
-                }, dely)
-            }
-        }
-    }
-    /**
-     * @desc 函数节流
-     * @param func 函数
-     * @param wait 延迟执行毫秒数
-     * @param type 1 表时间戳版，2 表定时器版
-     */
-    function throttle(func, wait, type) {
-        if (type === 1) {
-            let previous = 0;
-        } else if (type === 2) {
-            let timeout;
-        }
-        return function () {
-            let context = this;
-            let args = arguments;
-            if (type === 1) {
-                let now = Date.now();
-
-                if (now - previous > wait) {
-                    func.apply(context, args);
-                    previous = now;
-                }
-            } else if (type === 2) {
-                if (!timeout) {
-                    timeout = setTimeout(() => {
-                        timeout = null;
-                        func.apply(context, args)
-                    }, wait)
-                }
-            }
-
-        }
-    }
-    /* 手写ajax请求 */
-    function ajax(value) {
-        console.log(this.value)
-        console.log(value)
-        var value = this.value
-        return new Promise((resolve, reject) => {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', "url?value=" + value, false);
-            xhr.setRequestHeader('Content-Type', "application/json");
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) return;
-                if (xhr.status === 200 || xhr.status === 304) {
-                    resolve(xhr.responseText);
-                } else {
-                    reject(new Error(xhr.responseText))
-                }
-            }
-            xhr.send()
-        })
-    }
-    /* ---------------------- */
-
-
-</script>
-
+					if (now - previous > wait) {
+						func.apply(context, args);
+						previous = now;
+					}
+				} else if (type === 2) {
+					if (!timeout) {
+						timeout = setTimeout(() => {
+							timeout = null;
+							func.apply(context, args);
+						}, wait);
+					}
+				}
+			};
+		}
+		/* 手写ajax请求 */
+		function ajax(value) {
+			console.log(this.value);
+			console.log(value);
+			var value = this.value;
+			return new Promise((resolve, reject) => {
+				var xhr = new XMLHttpRequest();
+				xhr.open('GET', 'url?value=' + value, false);
+				xhr.setRequestHeader('Content-Type', 'application/json');
+				xhr.onreadystatechange = function () {
+					if (xhr.readyState === 4) return;
+					if (xhr.status === 200 || xhr.status === 304) {
+						resolve(xhr.responseText);
+					} else {
+						reject(new Error(xhr.responseText));
+					}
+				};
+				xhr.send();
+			});
+		}
+		/* ---------------------- */
+	</script>
 </html>
