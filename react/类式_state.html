@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>hello_react</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			.abc {
+				background: gray;
+				height: 30vh;
+				line-height: 30vh;
+				text-align: center;
+				color: #fff;
+				font-weight: 800;
+				font-size: 5rem;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 准备好一个“容器” -->
+		<div id="test"></div>
+		<!-- 引入react核心库 -->
+		<script
+			type="text/javascript"
+			src="../lib/react.development.js"
+		></script>
+		<!-- 引入react-dom，用于支持react操作DOM -->
+		<script
+			type="text/javascript"
+			src="../lib/react-dom.development.js"
+		></script>
+		<!-- 引入babel，用于将jsx转为js -->
+		<script type="text/javascript" src="../lib/babel.min.js"></script>
+		<script type="text/babel">
+			class Hello extends React.Component {
+				constructor(props) {
+					super(props);
+					this.state = {
+						isChange: false
+					};
+					this.changeState = this.changeState.bind(this);
+				}
+				render() {
+					const { isChange } = this.state;
+					return (
+						<div
+							className='abc'
+							onClick={this.changeState}
+							style={{
+								backgroundColor: isChange ? 'skyBlue' : 'gray'
+							}}
+						>{`Hello:${isChange ? '在改一下' : '改一下'}颜色`}</div>
+					);
+				}
+				changeState() {
+					console.log(this);
+					const { isChange } = this.state;
+					this.setState({
+						isChange: !isChange
+					});
+				}
+			}
+
+			ReactDOM.render(<Hello />, document.getElementById('test'));
+		</script>
+	</body>
+</html>

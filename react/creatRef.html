@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>hello_react</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			.test {
+				background: gray;
+				height: 30vh;
+				line-height: 30vh;
+				text-align: center;
+				color: #fff;
+				font-weight: 800;
+				font-size: 5rem;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 准备好一个“容器” -->
+		<div id="test"></div>
+		<!-- 引入react核心库 -->
+		<script
+			type="text/javascript"
+			src="../lib/react.development.js"
+		></script>
+		<!-- 引入react-dom，用于支持react操作DOM -->
+		<script
+			type="text/javascript"
+			src="../lib/react-dom.development.js"
+		></script>
+		<!-- 引入babel，用于将jsx转为js -->
+		<script type="text/javascript" src="../lib/babel.min.js"></script>
+		<script type="text/javascript" src="../lib/prop-types.js"></script>
+		<!-- <link rel="stylesheet" href="../lib/antd.css" />
+		<script src="../lib/antd.js"></script> -->
+		<script type="text/babel">
+			class HelloRef extends React.Component {
+				testRef = React.createRef();
+				showData = () => {
+					console.log(this);
+					console.log(this.testRef.current.value);
+				};
+				render() {
+					return (
+						<div>
+							<input
+								type='text'
+								ref={this.testRef}
+								placeholder='点哈'
+							/>
+							<button onClick={this.showData}>再点</button>
+						</div>
+					);
+				}
+			}
+
+			ReactDOM.render(<HelloRef />, document.getElementById('test'));
+		</script>
+	</body>
+</html>

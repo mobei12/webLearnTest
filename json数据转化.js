@@ -3,25 +3,27 @@ const {
 	code
 } = require('./response.json');
 const http = require('http');
-
-http.get(
-	'http://10.10.11.2:9010/atlas/graph_search/zcw_list?page=1&pagesize=5',
-	response => {
-		let todo = '';
-
-		// called when a data chunk is received.
-		response.on('data', chunk => {
-			todo += chunk;
-		});
-
-		// called when the complete response is received.
-		response.on('end', () => {
-			console.log(JSON.parse(todo).title);
+const req = http.request(
+	{
+		hostname: '10.10.11.2',
+		port: 9010,
+		method: 'POST',
+		path: '/atlas/graph_search/zcw_list?page=1&pagesize=5',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		}
+	},
+	res => {
+		res.on('data', chunk => {
+			console.log(chunk.toString());
 		});
 	}
-).on('error', error => {
-	console.log('Error: ' + error.message);
+);
+
+req.on('error', err => {
+	console.log(err);
 });
+req.end();
 return;
 const fs = require('fs');
 const path = require('path');
