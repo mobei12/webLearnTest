@@ -1,10 +1,13 @@
-class Test {
-	constructor(a) {
-		this.a = a;
+const consoleStar = rowsNumber => {
+	let half = Math.ceil(rowsNumber / 2);
+	for (let i = 1; i < rowsNumber + 1; i++) {
+		if (i <= half) {
+			console.log(' '.repeat(half - i) + '*'.repeat(2 * i - 1));
+		} else {
+			console.log(
+				' '.repeat(i - half) + '*'.repeat(rowsNumber - (i - half) * 2)
+			);
+		}
 	}
-	add(b) {
-		return this.a + b;
-	}
-}
-const test = new Test('test');
-console.log(test.add(1));
+};
+consoleStar(11);
