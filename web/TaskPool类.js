@@ -14,50 +14,41 @@ class TaskPool {
 	constructor() {
 		this.queue = []; // 任务队列
 		this.runing = false; //是否正在执行
-		this.index = 0; // 游标
-
-		// next 方法
-		this.next = () => {
-			if (this.index >= this.queue.length - 1) return;
-			// 游标 + 1
-			const cur = this.queue[++this.index];
-			cur(this.next);
-		};
 	}
 	delayRun(delayTime, callback) {
-		console.log(`打印 register ${delayTime} ${callback.name}`);
-		this.queue.push(next => {
+		console.log(`register ${delayTime} ${callback.name}`);
+		this.queue.push(() => {
 			setTimeout(() => {
 				callback();
-				next();
+				if (this.queue.length > 0) {
+					this.queue.shift()();
+				}
 			}, delayTime);
 		});
 		if (!this.runing) {
 			this.runing = true;
 			setTimeout(() => {
-				const cur = this.queue[this.index];
-				typeof cur === "function" && cur(this.next);
+				const cur = this.queue.shift();
+				typeof cur === 'function' && cur();
 			}, 0);
 		}
 		return this;
 	}
 }
-
 const instance = new TaskPool();
-
 instance
 	.delayRun(3000, function task1() {
-		console.log("run log 1");
+		console.log('run log 1');
 	})
 	.delayRun(2000, function task2() {
-		console.log("run log 2");
+		console.log('run log 2');
 	})
 	.delayRun(1000, function task3() {
-		console.log("run log 3");
+		console.log('run log 3');
 	});
 
 setTimeout(() => {
 	instance.delayRun(10, function task4() {
-		console.log("run log 4");
+		console.log('run log 4');
 	});
 }, 4000);

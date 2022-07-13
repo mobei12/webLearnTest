@@ -1,13 +1,6 @@
-const consoleStar = rowsNumber => {
-	let half = Math.ceil(rowsNumber / 2);
-	for (let i = 1; i < rowsNumber + 1; i++) {
-		if (i <= half) {
-			console.log(' '.repeat(half - i) + '*'.repeat(2 * i - 1));
-		} else {
-			console.log(
-				' '.repeat(i - half) + '*'.repeat(rowsNumber - (i - half) * 2)
-			);
-		}
-	}
+const haveCharacter = strVal => {
+	//匹配除了.的特殊字符
+	const testStr = RegExp(/[^\w^\s^\u4e00-\u9fa5^\u002e]/);
+	return testStr.test(strVal);
 };
-consoleStar(11);
+console.log(haveCharacter("124."))
