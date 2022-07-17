@@ -3,28 +3,20 @@
 	<head>
 		<script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
 		<script>
-			//
-			// Declare Database
-			//
-			var db = new Dexie('FriendDatabase');
-			db.version(1).stores({
-				friends: '++id,name,age'
+			const promise1 = new Promise((resolve, reject) => {
+				setTimeout(() => {
+					resolve('success');
+				}, 1000);
 			});
-
-			//
-			// Manipulate and Query Database
-			//
-			db.friends
-				.add({ name: 'Josephine', age: 21 })
-				.then(function () {
-					return db.friends.where('age').below(25).toArray();
-				})
-				.then(function (youngFriends) {
-					alert('My young friends: ' + JSON.stringify(youngFriends));
-				})
-				.catch(function (e) {
-					alert('Error: ' + (e.stack || e));
-				});
+			const promise2 = promise1.then(() => {
+				throw new Error('error!!!');
+			});
+			console.log('promise1', promise1);
+			console.log('promise2', promise2);
+			setTimeout(() => {
+				console.log('promise1', promise1);
+				console.log('promise2', promise2);
+			}, 2000);
 		</script>
 	</head>
 </html>

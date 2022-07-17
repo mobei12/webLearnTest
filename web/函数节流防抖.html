@@ -13,6 +13,14 @@
 		</div>
 	</body>
 	<script type="text/javascript">
+		/*函数防抖和节流
+函数防抖和函数节流：优化高频率执行js代码的一种手段，js中的一些事件如浏览器的resize、scroll，鼠标的mousemove、mouseover，input输入框的keypress等事件在触发时，会不断地调用绑定在事件上的回调函数，极大地浪费资源，降低前端性能。为了优化体验，需要对这类事件进行调用次数的限制。
+函数防抖
+在事件被触发n秒后再执行回调，如果在这n秒内又被触发，则重新计时。
+函数节流
+每隔一段时间，只执行一次函数。
+*/
+
 		var input = document.getElementById('inputDom');
 		input.oninput = fd(ajax, 2000, true);
 		/**
