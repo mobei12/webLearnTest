@@ -10,16 +10,21 @@ function myInstanceof(left, right) {
 }
 /* 柯里化 */
 function curry(fn) {
-	let judge = (...arg) => {
-		if (arg.length == fn.length) return fn(...arg);
-		return (...arg2) => {
-			return judge(...arg, ...arg2);
-		};
+	let result = (...args) => {
+		if (fn.length == args.length) return fn(...args);
+		else return (...arg) => result(...arg, args);
 	};
-	return judge;
+	return result;
 }
-function add(a, b, c) {
+function add(a, b = 0, c = 0) {
 	return a + b + c;
 }
 let addCurry = curry(add);
 console.log(addCurry(1)(2)(3));
+//Compose函数，传人一次数据，经过不同函数执行，得到结果
+const ride = (val = 1) => val * 10;
+const Compose =
+	(...args) =>
+	x =>
+		args.reduceRight((res, cb) => cb(res), x);
+const compose = Compose(add, ride);
