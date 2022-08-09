@@ -29,6 +29,8 @@ var arr = [
 /**
  *
  * @param {Array} arr
+ * @param {String} parent_id
+ * @param {String} key
  *  return {Object}
  */
 let returnO = (arr, parent_id = null, key = 'parent_id') =>
@@ -55,7 +57,7 @@ function arrayToTree(items) {
 		const treeItem = itemMap[id]
 
 		if (parent_id === null) {
-			result.push(treeItem) //用引用地址简历链接
+			result.push(treeItem) //用引用地址建立链接
 		} else {
 			if (!itemMap[parent_id]) {
 				itemMap[parent_id] = {
