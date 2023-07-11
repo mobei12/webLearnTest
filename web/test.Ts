@@ -1,16 +1,11 @@
-class Father {
-	name: string
-	constructor(name: string) {
-		this.name = name
+const a = [
+	{
+		type: 1,
+		uid: 1,
+		name: 'Snipast.e_2022-12-09_10-09-10.png',
+		status: 'done',
+		url: 'Z3JvdXAxL00wMC8wMC8wOS9yQkszOW1PUzlmeUFmYzA0QUFBUk5PSHRFc3czNjMucG5n'
 	}
-}
-class Son extends Father {
-	public age: Number
-	constructor(name: string, age: Number) {
-		super(name)
-		this.name = name
-		this.age = age
-	}
-}
-const son = new Son('hah', 12)
-console.log(son.name)
+];
+const b = [1,1]
+console.log(b.toString())

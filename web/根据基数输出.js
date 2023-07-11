@@ -42,4 +42,16 @@ const consoleStar = rowsNumber => {
 		}
 	}
 };
-renderDiamond(7);
+
+const getNumberPrint = n => {
+	let stars = '*',
+		space = '-';
+	for (let index = 1; index <= n; index++) {
+		if (index * 2 - 1 < n) {
+			console.log(space.repeat((n - stars.length) / 2) + stars);
+		} else {
+			console.log(`___${stars}`);
+		}
+	}
+};
+getNumberPrint(5);
