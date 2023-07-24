@@ -1,42 +1,19 @@
 /**
- * @param {number} n
- * @return {boolean}
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
  */
 /**
- * @param {number[]} nums
- * @return {number}
+ * @param {TreeNode} p
+ * @param {TreeNode} q
+ * @return {boolean}
  */
-var largestUniqueNumber = function (nums) {
-	let map = new Map();
-	let max = -1;
-	for (let i = 0; i < nums.length; i++) {
-		if (map.has(nums[i])) {
-			map.set(nums[i], map.get(nums[i]) + 1);
-		} else {
-			map.set(nums[i], 1);
-		}
-	}
-	map.forEach((value, key) => {
-		if (value === 1) {
-			max = Math.max(max, key);
-		}
-	});
-	return max;
+var isSameTree = function (p, q) {
+    SS
 };
-console.log(
-	largestUniqueNumber([
-		[
-			280, 280, 996, 996, 994, 994, 863, 863, 617, 617, 174, 174, 278,
-			278, 530, 530, 376, 376, 879, 879, 967, 967, 961, 961, 725, 725,
-			653, 653, 759, 759, 3, 3, 828, 828, 605, 605, 851, 851, 680, 680,
-			848, 848, 272, 272, 961, 961, 404, 404, 141, 141, 253, 253, 2, 2,
-			366, 366, 983, 983, 814, 814, 81, 81, 531, 531, 220, 220, 439, 439,
-			0, 0, 339, 339, 963, 963, 535, 535, 984, 984, 697, 697, 777, 777,
-			895, 895, 291, 291, 996, 996, 132, 132, 95, 95, 603, 603, 135, 135,
-			671, 671, 138, 138, 593, 593, 55, 55, 502, 502, 916, 916, 951, 951,
-			575, 575, 577, 577, 231, 231, 706, 706, 791, 791, 28, 28, 340, 340,
-			246, 246, 207, 207, 494, 494, 584, 584, 888, 888, 651, 651, 627,
-			627, 868, 868
-		]
-	])
-);
+const p = [1, 2, 3],
+	q = [1, 2, 3];
+console.log(isSameTree(p, q));
