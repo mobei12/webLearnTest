@@ -1,3 +1,4 @@
+/**手写call*/
 Function.prototype.MyCall = function (context) {
 	var context = context || window
 	context.fn = this
@@ -12,7 +13,7 @@ Function.prototype.MyCall = function (context) {
 	delete context.fn
 	return result
 }
-
+/**手写Apply*/
 Function.prototype.MyApply = function (content) {
 	var context = content || window
 	context.fn = this
@@ -32,10 +33,9 @@ Function.prototype.MyApply = function (content) {
 	delete context.fn
 	return result
 }
-
 var arr = [1, 10, 5, 8, 3]
 console.log(Math.max.MyApply(null, arr)) //10
-
+/**手写bind*/
 Function.prototype.MyBind = function (contents) {
 	//this is the function
 	let _this = this
@@ -90,7 +90,7 @@ if (!Function.prototype.bind) {
 		return fBound
 	}
 }
-
+/**手写new*/
 function myNew() {
 	var obj = new Object()
 	//获取构造函数
@@ -105,7 +105,6 @@ function myNew() {
 	//如果构造函数返回的是对象，则返回对象，否则返回obj
 	return typeof ret === 'object' ? ret : obj
 }
-
 function Otaku(name, age) {
 	this.name = name
 	this.age = age
@@ -119,3 +118,99 @@ Otaku.prototype.sayYourName = function () {
 }
 var otaku = myNew(Otaku, 'Mobeigege', 18)
 console.log(otaku) //Mobeigege
+
+
+/**手写forEach*/
+Array.prototype.myForEach = function (callback, arg) {
+	if (this === null) throw new TypeError('this is null or not defined');
+	if (typeof callback !== 'function')
+		throw new TypeError(`${callback}this is  not function`);
+	const o = Object(this);
+	console.log(this);
+	const length = o.length >>> 0;
+	let index = 0;
+	while (index < length) {
+		if (index in o) callback.call(arg, o[index], index, o);
+		index++;
+	}
+};
+/**手写map*/
+Array.prototype.myMap = function (callback, arg) {
+	if (this === null) throw new TypeError('this is null or not defined');
+	if (typeof callback !== 'function')
+		throw new TypeError(`${callback}this is  not function`);
+	const o = Object(this);
+	console.log(this);
+	const length = o.length >>> 0;
+	let index = 0;
+	const result = [];
+	while (index < length) {
+		if (index in o) result.push(callback.call(arg, o[index], index, o));
+		index++;
+	}
+    return result
+};
+const arrMyForEach = [1, 2, 3];
+arrMyForEach.myForEach(item => {
+	console.log(item * 3);
+});
+let arr = [1, 2, 3, [1, 2, 3, [1, 2, 3]]];
+/** 数组降维*/
+function flatten(arr) {
+	while (arr.some(item => Array.isArray(item))) {
+		arr = [].concat(...arr);
+	}
+	return arr;
+}
+function es5flatten(arr) {
+	let result = [];
+	for (let index = 0; index < arr.length; index++) {
+		const element = arr[index];
+		if (element instanceof Array) {
+			result = result.concat(es5flatten(element));
+		} else {
+			result.push(element);
+		}
+	}
+	return result;
+}
+function reduceFlatten(arr) {
+	return arr.reduce((prev, curr) => {
+		if (curr instanceof Array) {
+			return prev.concat(reduceFlatten(curr));
+		} else {
+			return prev.concat(curr);
+		}
+	}, []);
+}
+/**	实例 instanceof */
+function myInstanceof(left, right) {
+	let proto = Object.getPrototypeOf(left);
+	while (proto) {
+		if (proto === null) return false;
+		if (proto === right.prototype) {
+			return true;
+		}
+		proto = Object.getPrototypeOf(proto);
+	}
+}
+/* 柯里化 */
+function curry(fn) {
+	let result = (...args) => {
+		if (fn.length == args.length) return fn(...args);
+		else return (...arg) => result(...arg, args);
+	};
+	return result;
+}
+function add(a, b = 0, c = 0) {
+	return a + b + c;
+}
+let addCurry = curry(add);
+console.log(addCurry(1)(2)(3));
+//Compose函数，传人一次数据，经过不同函数执行，得到结果
+const ride = (val = 1) => val * 10;
+const Compose =
+	(...args) =>
+	x =>
+		args.reduceRight((res, cb) => cb(res), x);
+const compose = Compose(add, ride);
