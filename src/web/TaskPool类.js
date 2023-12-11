@@ -13,7 +13,7 @@ class TaskPool {
 	// 设计 delayRun() 方法，支持链式操作，注意 delayTime 是间隔时长
 	constructor() {
 		this.queue = []; // 任务队列
-		this.runing = false; //是否正在执行
+		this.runIng = false; //是否正在执行
 	}
 	delayRun(delayTime, callback) {
 		console.log(`register ${delayTime} ${callback.name}`);
@@ -25,8 +25,8 @@ class TaskPool {
 				}
 			}, delayTime);
 		});
-		if (!this.runing) {
-			this.runing = true;
+		if (!this.runIng) {
+			this.runIng = true;
 			setTimeout(() => {
 				const cur = this.queue.shift();
 				typeof cur === 'function' && cur();
