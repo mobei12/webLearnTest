@@ -1,18 +1,15 @@
 /**
+ * @param {Array} arr
  * @param {Function} fn
- * @param {number} t milliseconds
- * @return {Function}
+ * @return {Array}
  */
-var debounce = function(fn, t) {
-    
-    return function(...args) {
-        
-    }
+var sortBy = function(arr, fn) {
+    const res = []
+    arr.forEach(element => {
+        res.push({id:fn(element),element})
+    });
+    res.sort((a,b)=> a.id-b.id)
+    return res.map(el=> el.element)
 };
-
-/**
- * const log = debounce(console.log, 100);
- * log('Hello'); // cancelled
- * log('Hello'); // cancelled
- * log('Hello'); // Logged at t=100ms
- */
+const arr = [[3, 4], [5, 2], [10, 1]], fn = (x) => x[1]
+console.log(sortBy(arr,fn))

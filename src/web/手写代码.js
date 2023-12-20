@@ -214,3 +214,21 @@ const Compose =
 	x =>
 		args.reduceRight((res, cb) => cb(res), x);
 const compose = Compose(add, ride);
+/**
+ * @param {Array} arr
+ * @param {number} size
+ * @return {Array}
+ */
+
+var chunk = function(arr, size) {
+    if(arr.length===0) return []
+    if(arr.length<=size) return [arr]
+    let res = []
+    for(let i = 0;i<arr.length;i+=size){
+        res.push(arr.slice(i,i+size))
+
+    }
+    return res
+};
+const chunkarr = [8,5,3,2,6], chunksize = 6
+chunk(chunkarr,chunksize)//[[8,5,3,2,6]]
