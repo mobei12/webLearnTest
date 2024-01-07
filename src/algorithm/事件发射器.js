@@ -10,21 +10,23 @@
  
  */
 class EventEmitter {
-    evnets = {}
+    constructor() {
+        this.events = {}
+    }
     /**
      * @param {string} eventName
      * @param {Function} callback
      * @return {Object}
      */
     subscribe(eventName, callback) {
-        if (this.evnets[eventName]) {
-            this.evnets[eventName].push(callback)
+        if (this.events[eventName]) {
+            this.events[eventName].push(callback)
         } else {
-            this.evnets[eventName] = [callback]
+            this.events[eventName] = [callback]
         }
         return {
             unsubscribe: () => {
-                this.evnets[eventName] = this.evnets[eventName].filter(item => item != callback)
+                this.events[eventName] = this.events[eventName].filter(item => item != callback)
                 return undefined
             }
         };
@@ -36,8 +38,8 @@ class EventEmitter {
      * @return {Array}
      */
     emit(eventName, args = []) {
-        if (Array.isArray(this.evnets[eventName]) && (this.evnets[eventName]).length > 0) {
-            return this.evnets[eventName].map(fn => fn(...args))
+        if (Array.isArray(this.events[eventName]) && (this.events[eventName]).length > 0) {
+            return this.events[eventName].map(fn => fn(...args))
         }
         return []
     }
