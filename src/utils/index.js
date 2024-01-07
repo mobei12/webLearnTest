@@ -100,7 +100,7 @@ function debounce(params) {
  * @return  {Function}
  **/
 function throttle(params) {
-
+ const aa=1
 }
 
 module.exports = {
