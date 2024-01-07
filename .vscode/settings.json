@@ -1,0 +1,4 @@
+{
+    "git.httpProxy": "http://127.0.0.1:7890",
+    "git.httpsProxy": "https://127.0.0.1:7890",
+}
