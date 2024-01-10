@@ -84,24 +84,80 @@ function parseParam(url) {
 }
 /**
  * @desc 函数防抖 触发高频事件 N 秒后只会执行一次，如果 N 秒内事件再次触发，则会重新计时。
- * @param {Function} func
- * @param {Number} wait
- * @param {Boolean} immediate
+ * @param {Function} func 需要执行的函数
+ * @param {Number} wait 执行间隔时间
+ * @param {Boolean} immediate   是否立即执行
  * @return  {Function}
  **/
-function debounce(params) {
+function debounce(func, wait, immediate) {
+    var timeout, result;
 
+    var debounced = function () {
+        var context = this;
+        var args = arguments;
+
+        if (timeout) clearTimeout(timeout);
+        if (immediate) {
+            // 如果已经执行过，不再执行
+            var callNow = !timeout;
+            timeout = setTimeout(function () {
+                timeout = null;
+            }, wait)
+            if (callNow) result = func.apply(context, args)
+        } else {
+            timeout = setTimeout(function () {
+                func.apply(context, args)
+            }, wait);
+        }
+        return result;
+    };
+
+    debounced.cancel = function () {
+        clearTimeout(timeout);
+        timeout = null;
+    };
+
+    return debounced;
 }
 /**
  * @desc 函数节流 触发高频事件，且 N 秒内只执行一次。
- * @param {Function} func
- * @param {Number} wait
- * @param {Object} options
+ * @param {Function} func 需要执行的函数
+ * @param {Number} wait 执行间隔时间
  * @return  {Function}
  **/
-function throttle(params) {
- const aa=1
+function throttle(func, wait) {
+    var context, args;
+    var previous = 0;
+
+    var throttled = function () {
+        var now = +new Date();
+        context = this;
+        args = arguments;
+        if (now - previous > wait) {
+            func.apply(context, args);
+            previous = now;
+        }
+    }
+    throttled.cancel = function () {
+        previous = 0;
+    }
+    return throttled
 }
+
+
+/**
+ * @desc 什么叫函数柯里化
+ * @param {Function} fn
+ * @return  {Function}
+ **/
+function curry(fn) {
+    let judge = (...args) => {
+        if (args.length == fn.length) return fn(...args)
+        return (...arg) => judge(...args, ...arg)
+    }
+    return judge
+}
+
 
 module.exports = {
     typeOf,
@@ -109,5 +165,7 @@ module.exports = {
     isObject,
     flatten,
     debounce,
-    parseParam
+    throttle,
+    parseParam,
+    curry
 }
