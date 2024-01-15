@@ -207,7 +207,7 @@ function throttle(func, wait) {
 
 
 /**
- * @desc 什么叫函数柯里化
+ * @desc 函数柯里化
  * @param {Function} fn
  * @return  {Function}
  **/
@@ -218,6 +218,33 @@ function curry(fn) {
     }
     return judge
 }
+/**
+ * @desc jsonp跨域
+ * @param {Object} {url,params, callbackName}
+ * @return  {Promise}
+ **/
+const jsonp = ({ url, params, callbackName }) => {
+    const generateUrl = () => {
+        let dataSrc = ''
+        for (let key in params) {
+            if (params.hasOwnProperty(key)) {
+                dataSrc += `${key}=${params[key]}&`
+            }
+        }
+        dataSrc += `callback=${callbackName}`
+        return `${url}?${dataSrc}`
+    }
+    return new Promise((resolve, reject) => {
+        const scriptEle = document.createElement('script')
+        scriptEle.src = generateUrl()
+        document.body.appendChild(scriptEle)
+        window[callbackName] = data => {
+            resolve(data)
+            document.removeChild(scriptEle)
+        }
+    })
+}
+
 
 
 module.exports = {
@@ -231,5 +258,6 @@ module.exports = {
     cloneSimple,
     deepClone,
     wholeDeepClone,
-    curry
+    curry,
+    jsonp
 }

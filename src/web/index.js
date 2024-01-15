@@ -1,8 +1,7 @@
-/**
- * @param {number[]} nums
- * @return {boolean}
- */
-var canJump = function(nums) {
+var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+//题目描述:有一组版本号如下['0.1.1', '2.3.3', '0.302.1', '4.2', '4.3.5', '4.3.4.5']。现在需要对其进行排序，排序的结果为 ['4.3.5','4.3.4.5','2.3.3','0.302.1','0.1.1']
+function sort(arr, target) {
+    
+}
 
-};
-console.log(Number)
+console.log(sort(arr, 5))
