@@ -1,24 +1,27 @@
 export default function reactive(state) {
-    const proxyO = {}, events = {}
-    for (const key in state) {
-        if (Object.hasOwnProperty.call(state, key)) {
-            Object.defineProperties(proxyO, key, {
-                get() {
-                    return state[key]
-                },
-                set(nVal) {
-                    events[key].forEach(cb => cb(state[key], nVal));
-                    state[key] = nVal
+    const events = new Map()
+    const handler = {
+        get(target, key) {
+            return Reflect.get(target, key);
+        },
+        set(target, key, value) {
+            if (target[key] !== value) {
+                if (!events.has(key)) {
+                    events.set(key, [])
                 }
-            })
+                events.get(key).forEach(cb => cb(Reflect.get(target, key), value));
+                Reflect.set(target, key, value);
+            }
+            return true
         }
     }
+    const proxyO = new Proxy(state, handler);
     function on(eventName, cb) {
         const key = eventName.replace('Update', '')
-        if (!events[key]) {
-            events[key] = []
+        if (!events.has(key)) {
+            events.set(key, []);
         }
-        events[key].push(cb)
+        events.get(key).push(cb);
     }
     return {
         state: proxyO,
