@@ -1,0 +1,18 @@
+{
+  "name": "weblearntest",
+  "version": "1.0.0",
+  "description": "生命不止,卷动不停",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "vite": "^5.0.12"
+  }
+}
