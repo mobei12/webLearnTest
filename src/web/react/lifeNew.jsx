@@ -62,11 +62,6 @@ export default class LifeNew extends React.Component {
         console.log('shouldComponentUpdate');
         return true;
     }
-    componentDidUpdate() {
-        console.log('componentDidUpdate');
-        //组件更新完成
-    }
-
     force = () => {
         //强制更新
         this.forceUpdate();

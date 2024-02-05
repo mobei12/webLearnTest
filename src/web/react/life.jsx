@@ -8,7 +8,12 @@ export default class Life extends React.Component {
     };
     animate = () => {
         let { opacity } = this.state;
-        opacity = opacity <= 0.1 ? 1 : opacity - 0.1;
+        if(opacity <= 0.1) {
+            window.clearInterval(this.timer);
+            this.timer = null;
+            return;
+        }
+        opacity =  opacity - 0.1;
         this.setState({ opacity });
     };
     componentWillMount() {
@@ -16,7 +21,7 @@ export default class Life extends React.Component {
     }
     //组件挂载完成后调用
     componentDidMount() {
-        this.timer = setInterval(this.animate, 200);
+        this.timer = setInterval(this.animate, 1200);
     }
     //组件卸载前调用
     componentWillUnmount() {
