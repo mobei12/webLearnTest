@@ -1,4 +1,4 @@
-const {Component} = React
+import {Component} from 'react'
 export default class HelloRef extends Component {
     constructor() {
         super();

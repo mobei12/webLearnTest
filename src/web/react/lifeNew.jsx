@@ -1,4 +1,5 @@
-export default class LifeNew extends React.Component {
+import {Component} from 'react'
+export default class LifeNew extends Component {
     constructor() {
         super();
         this.state = { opacity: 1, number: 0 };

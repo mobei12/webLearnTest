@@ -1,4 +1,5 @@
-export default class StateClass extends React.Component {
+import {Component} from 'react'
+export default class StateClass extends Component {
     constructor(props) {
         super(props);
         this.state = {

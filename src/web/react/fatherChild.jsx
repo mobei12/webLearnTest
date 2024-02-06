@@ -22,7 +22,8 @@
              * -----------------------------------------------------
              * 1.初始化组件
 			 */
-class Child extends React.Component {
+             import {Component} from 'react'
+class Child extends Component {
     //第2个及以后的渲染调用，会调用此方法
     componentWillReceiveProps(nextProps) {
         console.log(
@@ -56,7 +57,7 @@ class Child extends React.Component {
     }
 }
 
-export default class  Father extends React.Component {
+export default class  Father extends Component {
     state = {
         name: '小明',
         age: '1',

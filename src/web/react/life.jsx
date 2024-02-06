@@ -1,4 +1,5 @@
-export default class Life extends React.Component {
+import {Component} from 'react'
+export default class Life extends Component {
     state = { opacity: 1 };
     death = () => {
         //组件卸载
