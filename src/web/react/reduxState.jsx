@@ -1,17 +1,9 @@
-import { useState,useEffect } from "react"
 import store from "./store"
 import { counterAction } from "./store/action"
+import {useCounterHook} from './hooks/useCustomHook'
 const reduxState = ()=>{
-    const {getState,dispatch,subscribe} = store
-    const [count,setCount] = useState(getState().counter.count)
-    useEffect(()=>{
-        const unsubscribe =  subscribe(()=>{
-            setCount(getState().counter.count)
-        })
-        return ()=>{
-            unsubscribe()
-        }
-    },[])
+    const {dispatch} = store
+    const count = useCounterHook()
     return(
         <div>
             <h2>count:{count}</h2>
