@@ -1,6 +1,7 @@
 import { useState,useEffect } from 'react';
 import store from '../../store';
-export default function getCounter(defaultCount = 0) {
+type TCounter =  number
+export default function getCounter(defaultCount:TCounter = 0):TCounter {
     const [count, setCount] = useState(defaultCount);
     useEffect(() => {
         const unsubscribe = store.subscribe(() => {

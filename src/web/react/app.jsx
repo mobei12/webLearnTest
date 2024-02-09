@@ -1,5 +1,5 @@
 import {createRoot} from 'react-dom/client'
-import ReduxState from '@/web/React/reduxState.jsx'
+import ReduxState from '@/web/React/reduxState.tsx'
 /* import HelloRef from './refs.jsx'
 import LifeNew from './lifeNew.jsx'
 import Life from './life.jsx'
