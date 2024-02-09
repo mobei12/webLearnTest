@@ -25,6 +25,7 @@ export default createStore(reducers,composeEnhancers(applyMiddleware(thunk)))
 ```
 ##  访问计数值
 ```js
+// react component
 import store from 'store';
 const countValue = store.getState().count;
 console.log('当前计数值:', countValue);
