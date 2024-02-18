@@ -4,8 +4,6 @@ const states = []
 const stateSetters = []
 let statesIndex = 0
 
-const effects = []//[[1,2]] 二维数组
-let effectsIndex = 0
 export function useState(initVal) {
     states[statesIndex] = createState(initVal, statesIndex)
     stateSetters.push(createStateSetter(statesIndex))
@@ -36,6 +34,9 @@ export function useReducer(reducer, initialArg, init) {
     return [state, dispatch]
 
 }
+
+const effects = []//[[1,2]] 二维数组
+let effectsIndex = 0
 export function useEffect(setUp, dependencies) {
     if (typeof setUp !== "function") {
         throw new TypeError('回调函数要为函数')
@@ -49,15 +50,64 @@ export function useEffect(setUp, dependencies) {
         isChanged = dependencies.some((dep, index) => dep !== effects[effectsIndex][index])
     }
 
-    if (isChanged||dependencies===undefined) {
+    if (isChanged || dependencies === undefined) {
         setUp()
     }
     effects[effectsIndex] = dependencies
     effectsIndex++
 }
+
+const memosDependencies = []
+const memosVal = []
+let memosIndex = 0
+export function useMemo(calculate, dependencies) {
+    if (typeof calculate !== "function") {
+        throw new TypeError('回调函数要为函数')
+    }
+    if (dependencies && !Array.isArray(dependencies)) {
+        throw new TypeError('dependencies 应该是数组')
+    }
+    let isChanged = true
+    if (memosDependencies[memosIndex]) {
+        isChanged = dependencies.some((dep, index) => dep !== memosDependencies[memosIndex][index])
+    }
+    if (isChanged) {
+        memosVal[memosIndex] = calculate()
+    }
+    return memosVal[memosIndex]
+}
+const memoArr = []//[[cb,dep]]
+let memoI = 0
+export function useMemo1(calculate, dependencies) {
+    if (typeof calculate !== "function") {
+        throw new TypeError('回调函数要为函数')
+    }
+    if (dependencies && !Array.isArray(dependencies)) {
+        throw new TypeError('dependencies 应该是数组')
+    }
+    if (memoArr[memoI]) {
+        const [_memo, _dep] = memoArr[memoI]
+        const isAllSame = dependencies.every((item, i) => item === _dep[i])
+        if (isAllSame) {
+            memoI++
+
+            return _memo
+        } else {
+            memoArr[memoI] = [calculate(), dependencies]
+            memoI++
+            return calculate()
+        }
+    } else {
+        memoArr[memoI] = [calculate(), dependencies]
+        memoI++
+        return calculate()
+    }
+}
 async function render() {
     const App = (await import('./app')).default;
     statesIndex = 0
     effectsIndex = 0
+    memosIndex = 0
+    memoI = 0
     root.render(<App />)
 }
