@@ -1,5 +1,5 @@
 import { render } from './render.js'
-import { ref, createRefSet } from './refCe.js'
+import { ref,reactive, createRefSet } from './refCe.js'
 import { bindEvent } from './event.js'
 export const createVue = (el, options) => {
     const target = document.querySelector(el)
@@ -9,4 +9,4 @@ export const createVue = (el, options) => {
     render(refSet)
     bindEvent.apply(refs, [nodes, methods])
 }
-export { ref }
+export { ref ,reactive}
