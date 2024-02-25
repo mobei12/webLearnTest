@@ -1,22 +1,25 @@
 import {createRoot} from 'react-dom/client'
-import ReduxState from '@/web/React/reduxState.jsx'
-/* import HelloRef from './refs.jsx'
+/* import ReduxState from '@/web/React/reduxState.jsx'
+import HelloRef from './refs.jsx'
 import LifeNew from './lifeNew.jsx'
 import Life from './life.jsx'
 import StateClass from './StateClass.jsx'
-import Father from "./fatherChild.jsx" */
-import Game from './game.jsx'
+import Father from "./fatherChild.jsx"
+import Game from './game.jsx'*/
+import ShowList from './showList.jsx'
 
 function App() {
     return (
         <div style={{display: 'grid', gridTemplateColumns: 'repeat(3,1fr)',fontSize: '20px'}}>
-            <ReduxState/>
+           {/* <ReduxState/>
             <Game/>
-             {/*<HelloRef/>
+             <HelloRef/>
             <LifeNew/>
             <Life/>
             <StateClass/>
             <Father/> */}
+            <ShowList/>
+
         </div>
     )
 }
