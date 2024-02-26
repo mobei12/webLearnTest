@@ -1,4 +1,4 @@
-import HTTP from './httpUtils/index'
+import HTTP from '../httpUtils/index'
 const showList = () => {
     const dataOperate = (data) => {
         return data

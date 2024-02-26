@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './game.css'
+import './index.css'
 function Square({ value, onSquareClick }) {
     return (
         <button className="square" onClick={onSquareClick}>

@@ -1,6 +1,6 @@
-import store from "./store"
-import { counterAction } from "./store/action"
-import {useCounterHook} from './hooks/useCustomHook'
+import store from "../store"
+import { counterAction } from "../store/action"
+import {useCounterHook} from '../hooks/useCustomHook'
 const reduxState = ()=>{
     const {dispatch} = store
     const count = useCounterHook()

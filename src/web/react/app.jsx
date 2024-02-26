@@ -1,27 +1,29 @@
-import {createRoot} from 'react-dom/client'
+import { createRoot } from 'react-dom/client'
 /* import ReduxState from '@/web/React/reduxState.jsx'
-import HelloRef from './refs.jsx'
-import LifeNew from './lifeNew.jsx'
-import Life from './life.jsx'
-import StateClass from './StateClass.jsx'
-import Father from "./fatherChild.jsx"
-import Game from './game.jsx'*/
-import ShowList from './showList.jsx'
+import HelloRef from './pages/refs.jsx'
+import LifeNew from './pages/lifeNew.jsx'
+import Life from './pages/life.jsx'
+import StateClass from './pages/StateClass.jsx'
+import Father from "./pages/fatherChild.jsx"
+import Game from './pages/game/'*/
+//import ShowList from './pages/showList.jsx'
+import IntermittentTimer from './pages/intermittentTimer/index.jsx'
 
 function App() {
     return (
-        <div style={{display: 'grid', gridTemplateColumns: 'repeat(3,1fr)',fontSize: '20px'}}>
-           {/* <ReduxState/>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', fontSize: '20px' }}>
+            {/* <ReduxState/>
             <Game/>
              <HelloRef/>
             <LifeNew/>
             <Life/>
             <StateClass/>
-            <Father/> */}
-            <ShowList/>
+            <Father/> 
+            <ShowList/>*/}
+            <IntermittentTimer />
 
         </div>
     )
 }
 const root = createRoot(document.getElementById('test'))
-root.render(<App/>)
+root.render(<App />)
