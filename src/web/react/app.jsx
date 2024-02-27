@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client'
-/* import ReduxState from '@/web/React/reduxState.jsx'
+ /*import ReduxState from './pages/reduxState.jsx'
 import HelloRef from './pages/refs.jsx'
 import LifeNew from './pages/lifeNew.jsx'
 import Life from './pages/life.jsx'
@@ -12,7 +12,8 @@ import IntermittentTimer from './pages/intermittentTimer/index.jsx'
 function App() {
     return (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', fontSize: '20px' }}>
-            {/* <ReduxState/>
+            {/*<ReduxState/>
+             <ReduxState/>
             <Game/>
              <HelloRef/>
             <LifeNew/>
