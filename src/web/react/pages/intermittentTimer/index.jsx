@@ -4,6 +4,7 @@ import Info from './info'
 import CountDown from './countDown'
 import { useCounterHook } from '../../hooks/useCustomHook'
 import store from '../../store'
+import Message from '../../components/Message'
 const intermittentTimer = () => {
     const [time, { set:setTime, reset:resetTime }] = useCounterHook(10,{min:1})
     const [restTime, { set:setRestTime, reset:resetRest }] = useCounterHook(10,{min:0})
@@ -12,6 +13,7 @@ const intermittentTimer = () => {
     const [status, setStatus] = useState(getState().intermittentTimer.status);
     const confirm = () => {
         dispatch({type:'START',payload:{timerNumber:time,restNumber:restTime}})
+        Message()
     }
     const cancel = () => {
         dispatch({ type: 'STOP' })
