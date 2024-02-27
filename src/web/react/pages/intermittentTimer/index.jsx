@@ -1,11 +1,13 @@
 import { InputNumber, Button } from 'antd'
 import { useEffect,useState } from 'react'
 import Info from './info'
+import CountDown from './countDown'
 import { useCounterHook } from '../../hooks/useCustomHook'
 import store from '../../store'
 const intermittentTimer = () => {
     const [time, { set:setTime, reset:resetTime }] = useCounterHook(10,{min:1})
     const [restTime, { set:setRestTime, reset:resetRest }] = useCounterHook(10,{min:0})
+    const [restNumber, { set:setRestNumber, reset:resetRestNumber }] = useCounterHook(10,{min:0})
     const {dispatch,getState} = store
     const [status, setStatus] = useState(getState().intermittentTimer.status);
     const confirm = () => {
@@ -30,6 +32,7 @@ const intermittentTimer = () => {
     return (
         <div>
             {/* <Info user_id={123}/> */}
+            <CountDown status={status} time={time} restTime={restTime} restNumber={restNumber} />
             <div className="count-down">当前状态：{status}</div>
             <div className="set-time" style={{marginTop:'10px',display:"flex",gap:'10px'}}>
                 <span>时间设置(分)：</span>
@@ -37,9 +40,14 @@ const intermittentTimer = () => {
                 <Button disabled={isDisable()} onClick={resetTime} >重置</Button>
             </div>
             <div className="rest-time" style={{marginTop:'10px',display:"flex",gap:'10px'}}>
-            <span>间隔时间设置(秒)：</span>
+                 <span>间隔时间设置(秒)：</span>
                 <InputNumber disabled={isDisable()} value={restTime} onChange={e => { setRestTime(e) }} />
                 <Button disabled={isDisable()} onClick={resetRest} >重置</Button>
+            </div>
+            <div>
+                <span>休息次数：</span>
+                <InputNumber disabled={isDisable()} value={restNumber} onChange={e => { setRestNumber(e) }} />
+                <Button disabled={isDisable()} onClick={resetRestNumber} >重置</Button>
             </div>
             <div style={{marginTop:'10px',display:"flex",gap:'10px'}}>
                 <Button disabled={isDisable()} type="primary" onClick={confirm}>确定</Button>
