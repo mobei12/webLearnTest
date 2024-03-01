@@ -27,7 +27,7 @@
 			throw new Error(`'bound' cannot decorate private properties like ${methodName as string}.`);
 		}
 		context.addInitializer(function () {
-			this[methodName] = this[methodName].bind(this);
+			(this as any)[methodName] = (this as any)[methodName].bind(this);
 		});
 	}
 	const person = new Person('amy')

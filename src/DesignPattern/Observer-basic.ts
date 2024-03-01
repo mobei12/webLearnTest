@@ -1,17 +1,17 @@
 /** 观察者接口 */
-interface Observer {
+interface ObserverBasic {
 	update: (subject: Subject) => void;
 }
 interface Subject {
-	attach: (observer: Observer) => void; //附加
-	detach: (observer: Observer) => void; //删除
+	attach: (observer: ObserverBasic) => void; //附加
+	detach: (observer: ObserverBasic) => void; //删除
 	notify: () => void; //通知
 }
 
 class ConcreteSubject implements Subject {
-	private observers: Observer[] = [];
+	private observers: ObserverBasic[] = [];
 	public state: number;
-	attach(observer: Observer): void {
+	attach(observer: ObserverBasic): void {
 		const observerIndex = this.observers.indexOf(observer);
 		if (observerIndex !== -1) {
 			return console.log('该观察者已经被添加');
@@ -20,7 +20,7 @@ class ConcreteSubject implements Subject {
 			this.observers.push(observer);
 		}
 	}
-	detach(observer: Observer): void {
+	detach(observer: ObserverBasic): void {
 		const observerIndex = this.observers.indexOf(observer);
 		if (observerIndex === -1) {
 			return console.log('该观察者没有被添加');
@@ -46,7 +46,7 @@ class ConcreteSubject implements Subject {
 /**
  * 观察者实现
  */
-class ConcreteObserver implements Observer {
+class ConcreteObserver implements ObserverBasic {
 	update(subject: Subject): void {
 		console.log('ConcreteObserver 更新');
 		if (subject instanceof ConcreteSubject && subject.state < 3) {
