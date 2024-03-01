@@ -3,8 +3,7 @@ function createWebWorker(fn) {
         throw new TypeError('fn must be a function');
     }
     const blob = new Blob(['(' + fn + ')()'], { type: 'application/javascript' });
-    const worker = new Worker(URL.createObjectURL(blob));
-    return worker;
+    return new Worker(URL.createObjectURL(blob));
 }
 const pollingWorker = createWebWorker(function (e) {
     let cache
