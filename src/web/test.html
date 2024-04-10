@@ -5,10 +5,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        body {
+            height: 100vh;
+            background-color: #393838;
+        }
+
         #myList {
-            width: 200px;
-            height: 200px;
+            width: 40rem;
+            height: 40rem;
             margin: 0 auto;
+            background-color: aqua;
         }
     </style>
 </head>
@@ -16,7 +22,13 @@
 <body>
     <div id="myList">
     </div>
-    <script>
+    <script type="module">
+        import utils from '../utils/index.js';
+        const handleResize = utils.throttle(() => {
+            console.log(window.innerWidth, window.innerHeight);
+        }, 500);
+        window.addEventListener('resize', handleResize)
+        //window.removeEventListener('resize', handleResize);
     </script>
 </body>
 

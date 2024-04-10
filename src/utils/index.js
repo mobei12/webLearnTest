@@ -247,7 +247,7 @@ const jsonp = ({ url, params, callbackName }) => {
 
 
 
-module.exports = {
+export default {
     typeOf,
     getInit,
     isObject,
