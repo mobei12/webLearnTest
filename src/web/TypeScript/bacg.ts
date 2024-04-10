@@ -40,6 +40,8 @@ interface IPoint {
     color: string;
     opacity: number;
     opacityUp?: boolean;
+    x2?: number;
+    y2?: number;
 }
 function createPoint(obj: Particle): IPoint {
     let r = 0, color = randomColor()
@@ -208,20 +210,26 @@ class Particle implements TConfig {
     }
     private drawMeteor() {
         const { clientWidth, clientHeight } = this.container;
+        this.ctx!.clearRect(0, 0, clientWidth, clientHeight);
         this.points.forEach((item,i,arr) => {
-            if(this.isGone&&item.y + item.r > clientHeight||this.isGone&& item.x + item.r > clientWidth) {
+            if(this.isGone&&item.y2&&item.y2> clientHeight||this.isGone&& item.x2&&item.x2 > clientWidth) {
                 arr.splice(i, 1);
                 arr.push(createPoint(this));
                 return
             }
+            item.x2 = item.x2?item.x2+item.rate * this.rate!:200+item.rate * this.rate!+item.x;
+            item.y2 = item.y2?item.y2+item.rate * this.rate!:200+item.rate * this.rate!+item.y;
             // 简化粒子移动逻辑
-            item.x += item.rate * this.rate!
-            item.y += item.rate * this.rate!
             this.ctx!.beginPath();
-            this.ctx!.arc(item.x, item.y, item.r, 0, Math.PI * 2);
-            this.ctx!.fillStyle =  item.color!;
-            this.ctx!.globalAlpha = item.opacity;
-            this.ctx!.fill();
+            this.ctx!.strokeStyle = item.color; // 红色线条
+            this.ctx!.lineWidth = item.r; // 线条宽度
+
+            // 开始绘制路径
+            this.ctx!.beginPath();
+            this.ctx!.moveTo(item.x, item.y);
+            this.ctx!.lineTo(item.x2, item.y2);
+            // 绘制线条
+            this.ctx!.stroke();
         })
         requestAnimationFrame(this.drawMeteor.bind(this));
     }
@@ -237,8 +245,9 @@ function particleBac(element: HTMLElement, config: TConfig) {
 }
 
 particleBac(document.getElementById('app')!, {
-    count: 200,
+    count: 100,
     isGone: true,
     R: [3, 15],
+    rate: 1,
     meteorMode: true,
 });
