@@ -21,13 +21,23 @@
 
 <body>
     <div id="myList">
+        <input type="text" id="debounce" />
     </div>
     <script type="module">
-        import utils from '../utils/index.js';
-        const handleResize = utils.throttle(() => {
+        import { throttleTimer, debounce } from './test.js';
+        import u from '../utils/index.js';
+        function shot(content) {
+            console.log('!!!'+content)
+        }
+        const handleResize = throttleTimer(() => {
             console.log(window.innerWidth, window.innerHeight);
         }, 500);
         window.addEventListener('resize', handleResize)
+        let input = document.getElementById('debounce')
+        let debounceFun = debounce(shot, 500)
+        input.addEventListener('keyup', function (e) {
+            debounceFun(e.target.value)
+        })
         //window.removeEventListener('resize', handleResize);
     </script>
 </body>
