@@ -7,7 +7,8 @@ import StateClass from './pages/StateClass.jsx'
 import Father from "./pages/fatherChild.jsx"
 import Game from './pages/game/'*/
 //import ShowList from './pages/showList.jsx'
-import IntermittentTimer from './pages/intermittentTimer/index.jsx'
+// import IntermittentTimer from './pages/intermittentTimer/index.jsx'
+import Welcome from './pages/Welcome/index.jsx'
 
 function App() {
     return (
@@ -20,8 +21,9 @@ function App() {
             <Life/>
             <StateClass/>
             <Father/> 
-            <ShowList/>*/}
-            <IntermittentTimer />
+            <ShowList/>
+            <IntermittentTimer />*/}
+            <Welcome />
 
         </div>
     )
