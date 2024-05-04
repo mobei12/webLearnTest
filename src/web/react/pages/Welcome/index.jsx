@@ -14,8 +14,6 @@ function Welcome() {
 				document.body.style.backgroundColor = 'white';
 				document.body.style.color = 'black';
 			}
-		console.log(entry)
-
 		}, {
 			threshold: 1.0
 		});
