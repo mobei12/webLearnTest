@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import * as echarts from 'echarts/core';
 import {BarChart, LineChart} from 'echarts/charts';
+import lodash from 'lodash';
 import {
 	TitleComponent,
 	TooltipComponent,
@@ -59,15 +60,21 @@ const options: BarLineOption = {
 };
 const chartDom = ref(null);
 let myChart: echarts.EChartsType | null = null;
+const resizeEvent = (e: Event) => {
+	myChart && myChart.resize();
+}
+
 onMounted(() => {
 	myChart = echarts.init(chartDom.value);
 	myChart.setOption(options);
+	document.addEventListener('resize', lodash.throttle(resizeEvent, 500));
 });
 watch(props.series, (series) => {
 	//myChart.setOption();
 	myChart && myChart.setOption({...options, series}, true);
 }, {deep: true});
 onUnmounted(() => {
+	document.removeEventListener('resize', lodash.throttle(resizeEvent, 500));
 	myChart&&myChart?.dispose()
 	myChart = null;
 });
@@ -81,7 +88,8 @@ onUnmounted(() => {
 .ref-wrapper {
 	width: 100%;
 	height: 100%;
-	min-width: 300px;
-	min-height: 200px;
+	min-width: 20rem;
+	min-height: 20rem;
+	background-color: aqua;
 }
 </style>
