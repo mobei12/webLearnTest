@@ -1,4 +1,4 @@
-import {ITodoData} from "./typings";
+import {type ITodoData} from "./typings";
 import TodoTemplate from "./TodoTemplate";
 import {creatItem, findParent} from "./utils";
 
@@ -37,9 +37,9 @@ export default class TodoDom extends TodoTemplate {
 
     protected changeCompleted(target: HTMLElement, completed: boolean) {
         const oParent: HTMLElement = findParent(target, 'todo-item');
-        const oCheckbox: HTMLInputElement = oParent.querySelector('input');
-        const oSpan: HTMLElement = oParent.querySelector('span');
-        const oBtn: HTMLElement = oParent.querySelector('button');
+        const oCheckbox: HTMLInputElement = oParent.querySelector('input')!;
+        const oSpan: HTMLElement = oParent.querySelector('span')!;
+        const oBtn: HTMLElement = oParent.querySelector('button')!;
         oCheckbox.checked = completed;
         oSpan.style.textDecoration = completed ? 'line-through' : 'none';
         oBtn.className = oCheckbox.checked ? 'btn btn-danger' : 'btn btn-primary';
