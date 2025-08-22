@@ -9,6 +9,7 @@ import Game from './pages/game/'*/
 //import ShowList from './pages/showList.jsx'
 // import IntermittentTimer from './pages/intermittentTimer/index.jsx'
 import Welcome from './pages/Welcome/index.jsx'
+import Test from './pages/test.jsx'
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
             <ShowList/>
             <IntermittentTimer />*/}
             <Welcome />
+            <Test />
 
         </div>
     )

@@ -1,6 +1,6 @@
 import {useState, useEffect, useRef} from 'react';
 import {FadeInAnimation} from './animation.js';
-
+// 使用intersectionObserver 观察者，实现背景颜色切换
 function useBackGroundToggle(ref) {
   useEffect(() => {
     const div = ref.current;
