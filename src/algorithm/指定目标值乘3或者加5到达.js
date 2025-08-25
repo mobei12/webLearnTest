@@ -7,7 +7,7 @@ function getMinStep(aim) {
   visited.add(1);
 
   while (queue.length > 0) {
-	console.table(visited)
+    console.log(queue)
     const { value, step } = queue.shift();
 
     if (value === aim) return step;
