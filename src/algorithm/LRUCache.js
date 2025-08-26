@@ -1,3 +1,4 @@
+//（Least Recently Use）算法实现即最近最少使用，vue的keep-alive  
 class LRUCache {
   constructor(capacity) {
     this.cache = new Map();

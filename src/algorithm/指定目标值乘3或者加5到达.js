@@ -2,16 +2,11 @@
 function getMinStep(aim) {
   const queue = [];
   const visited = new Set();
-
   queue.push({ value: 1, step: 0 });
   visited.add(1);
-
   while (queue.length > 0) {
-    console.log(queue)
     const { value, step } = queue.shift();
-
     if (value === aim) return step;
-
     // 乘3
     const mul = value * 3;
     if (mul <= aim && !visited.has(mul)) {
