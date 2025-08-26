@@ -1,4 +1,5 @@
 import collections
+from typing import Optional
 class Tree:
     def __init__(self, val, left=None, right=None):
         self.val = val
@@ -9,12 +10,29 @@ class Tree:
 #       self.val =val
 #       self.left = left
 #       self.right = right
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 class Solution:
+    def list_to_tree(self, arr):
+        if not arr:
+            return None
+        nodes = [Tree(val) if val is not None else None for val in arr]
+        kids = nodes[::-1]
+        root = kids.pop()
+        for node in nodes:
+            if node:
+                if kids: node.left = kids.pop()
+                if kids: node.right = kids.pop()
+        return root
     ## 广度优先遍历，子节点是否在同一层
     def  solve(self,root):
         if root is None:
             return True
-        Q = collections.deque([(root,0)])
+        Q = collections.deque([(root,0)]) #队列，存储节点和对应深度
         depths = set()
         while len(Q) > 0 :
             cur,d = Q.popleft()
@@ -42,8 +60,37 @@ class Solution:
                     queue.append(node.right)
             res.append(curLevel)
         return res
+    ##在二叉搜索树中查找第 K 小的值
+    def kthSmallest(self, root, k: int):
+        res = []
+        node = root
+        count = 0
+        while res or node:
+            while node:
+                res.append(node) #append 在列表末尾添加节点
+                node = node.left
+            print([n.val for n in res])
+            node = res.pop()
+            print(node.val)
+            count += 1
+            if count==k:
+                return node.val
+            node = node.right
+    ## 在二叉搜索树中查找第 K 大的值
+    def kthMaxes(self,root,k:int):
+        res = []
+        node = root
+        count = 0
+        while res or node:
+            while node:
+                res.insert(0,node)#insert 在列表指定位置插入节点
+                node = node.right
+            node = res.pop(0) #pop() 移除并返回列表的一个节点，默认最后一个
+            count += 1
+            if count==k:
+                return node.val
+            node = node.left
 sol = Solution()
-root = Tree(1,
-            Tree(2, Tree(4)),
-            Tree(3, Tree(5), Tree(6)))
-print(sol.solve(root))
+# Construct the binary tree: [3,1,4,None,2]
+root = [5,3,6,2,4,None,None,1]
+print(sol.kthMaxes(sol.list_to_tree(root),5))
