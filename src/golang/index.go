@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 /**
  * Definition for a binary tree node.
  * type TreeNode struct {
@@ -14,35 +16,36 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-func levelOrder(root *TreeNode) [][]int {
-	var res [][]int
-	if root == nil {
-		return res
-	}
-	queue := []*TreeNode{root} //用切片模拟队列，初始时只包含根节点。
-	for len(queue) > 0 {       //只要队列不为空，就一直循环，每次循环处理一层
-		size := len(queue)
-		var level []int
-		for i := 0; i < size; i++ { //遍历当前层的所有节点
-			node := queue[0]                //取出队首节点
-			queue = queue[1:]               //从队列中移除
-			level = append(level, node.Val) //把当前节点的值加入本层的结果
-			if node.Left != nil {
-				queue = append(queue, node.Left)
-			}
-			if node.Right != nil {
-				queue = append(queue, node.Right)
-			}
+//在二叉搜索树中查找第 K 小的值
+func kthSmallest(root *TreeNode, k int) int {
+	var stack []*TreeNode
+	node := root
+	count := 0
+	for node != nil || len(stack) > 0 {
+		for node != nil {
+			stack = append(stack, node)
+			node = node.Left
 		}
-		res = append(res, level)
+		node = stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		count += 1
+		if count == k {
+			return node.Val
+		}
+		node = node.Right
 	}
-	return res
+	return -1
+
 }
 
 func main() {
-	a := [...]int{1, 2, 3, 4}
-	b := a[0:3]
-	for i := 0; i < len(b); i++ {
-		println(b[i])
-	}
+	root := &TreeNode{Val: 8}
+	root.Left = &TreeNode{Val: 3}
+	root.Right = &TreeNode{Val: 10}
+	root.Left.Left = &TreeNode{Val: 1}
+	root.Left.Right = &TreeNode{Val: 6}
+	root.Left.Right.Left = &TreeNode{Val: 4}
+	root.Left.Right.Right = &TreeNode{Val: 7}
+	root.Right.Right = &TreeNode{Val: 14}
+	fmt.Println(kthSmallest(root, 3)) // 3
 }
