@@ -59,7 +59,9 @@ func main() {
 	root.Left.Right.Right = &TreeNode{Val: 7}
 	root.Right.Right = &TreeNode{Val: 14} */
 	//fmt.Println(kthSmallest(root, 3)) // 3
-	for i := 0; i < 8; i++ {
+	/* for i := 0; i < 8; i++ {
 		fmt.Println(fib(i))
-	}
+	} */
+	a := [...]int{1, 2, 3, 4}
+	fmt.Println(a[:2])
 }

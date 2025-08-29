@@ -1,15 +1,13 @@
-const arr = [1, 1, 2, 2, 2, 5, 10, 11, 11];
-const k = 2;
-const map = new Map();
-arr.forEach((item) => {
-  if (map.has(item)) {
-    map.set(item, map.get(item) + 1);
-  } else {
-    map.set(item, 1);
+//爬楼梯，每次只能上1阶，或者2阶，n阶有多少种爬法
+//0->0,1->1;2->1、1,2;3->1、2,2、1,1、1、;4->1、1、1、1,1、1、2,1、2、1,2、1、1,2、2
+
+function goSteps(n) {
+  if (n < 3) return n;
+  let l = 1,
+    r = 2;
+  for (let i = 3; i <= n; i++) {
+    [l, r] = [r, l + r];//动态规划+交换法，从尾部倒推，n阶的到达方式是 (n-1)+(n-2)
   }
-});
-const res = new Map();
-const temp = [];
-for (const [key, value] of map) {
-  console.log(key, value);
+  return r;
 }
+console.log(goSteps(4));
