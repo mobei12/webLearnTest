@@ -1,5 +1,6 @@
 import collections
 from typing import Optional
+from collections import deque
 class Tree:
     def __init__(self, val, left=None, right=None):
         self.val = val
@@ -90,7 +91,19 @@ class Solution:
             if count==k:
                 return node.val
             node = node.left
+    ## 回文数
+    def isPalindrome(self,x:int)->bool:
+        s= str(x)
+        l,j= 0,len(s)-1
+
+        while l<j:
+            if s[j] != s[l]:
+                return False
+            j -=1
+            l +=1
+        return True
+    
 sol = Solution()
 # Construct the binary tree: [3,1,4,None,2]
-root = [5,3,6,2,4,None,None,1]
-print(sol.kthMaxes(sol.list_to_tree(root),5))
+num =12332
+print(sol.isPalindrome(num))
