@@ -1,9 +1,9 @@
-import {Component} from 'react'
+import {Component,createRef} from 'react'
 export default class LifeNew extends Component {
     constructor() {
         super();
         this.state = { opacity: 1, number: 0 };
-        this.titleRec = React.createRef();
+        this.titleRec = createRef();
         console.log('constructor');
     }
     death = () => {

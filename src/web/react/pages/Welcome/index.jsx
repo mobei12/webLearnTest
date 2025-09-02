@@ -59,12 +59,12 @@ function Welcome() {
 export default function Main() {
 	const [show, setShow] = useState(false);
 	return (
-		<>
+		<div>
 			<button onClick={() => setShow(!show)}>
 				{show ? 'Remove' : 'Show'}
 			</button>
 			<hr/>
 			{show && <Welcome/>}
-		</>
+		</div>
 	);
 }
