@@ -33,9 +33,10 @@ class Child extends Component {
         );
     }
     //组件的渲染,控制
-    shouldComponentUpdate() {
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log(nextProps);
         console.log(`子`, 'shouldComponentUpdate');
-        return true;
+        return false;
     }
     componentWillUpdate() {
         //组件将要更新

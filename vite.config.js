@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue'
 
 const pathRoot = process.cwd();
 export default defineConfig({
-	root: './src/web/vue3',//地址，会打开里面的index.html,
+	root: './src/web/react',//地址，会打开里面的index.html,
 	plugins: [
 		react(), vue()
 	],

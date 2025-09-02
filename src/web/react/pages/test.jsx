@@ -1,23 +1,68 @@
-import { useState, useCallback } from "react";
-
-const funcAlert = () => {
-  const [val, setVal] = useState(0);
-  const add = useCallback(() => {
-    setTimeout(() => {
-      alert(val);
-    }, 3000);
-  }, [val]);
-  return (
-    <section>
-      <h3>val:{val}</h3>
-      <button onClick={() => setVal(val + 1)}>add</button>
-      <br />
-      <br />
-      <button onClick={() => add(val)}>alert</button>
-      <br />
-      <br />
-      <button onClick={() => setVal(0)}>rest</button>
-    </section>
-  );
+import React from "react";
+class Index extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  render() {
+    const { name, changeName } = this.props;
+    console;
+    return (
+      <div>
+        <h3> hello,world ,my name is {name}</h3>
+        改名字
+        <input
+          type="text"
+          onChange={(e) => {
+            this.setState({ val: e.target.value });
+          }}
+        />
+        <button onClick={() => changeName(this.state.val)}>change name</button>
+      </div>
+    );
+  }
+}
+Index.say = function () {
+  console.log("my name is alien");
 };
-export default funcAlert;
+/**
+ * @description: 正向继承
+ * @param {*} Component
+ */
+function HOC(Component) {
+  return class wrapComponent extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = { name: "zhangsan" };
+    }
+
+    render() {
+      return <Component {...this.props} {...this.state} />;
+    }
+  };
+}
+/**
+ * @description: 反向继承
+ * @param {*} Component
+ */
+function ReverseHoc(WrapComponent) {
+  return class wrapComponent extends React.Component {
+    state = { name: "zhangsan" };
+    componentDidMount() {
+      console.log("componentDidMount");
+    }
+    changeName = (name) => {
+      this.setState({ name });
+    };
+    render() {
+      return (
+        <WrapComponent
+          {...this.props}
+          {...this.state}
+          changeName={this.changeName}
+        />
+      );
+    }
+  };
+}
+export default ReverseHoc(Index);
