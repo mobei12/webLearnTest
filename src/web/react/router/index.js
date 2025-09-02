@@ -1,75 +1,80 @@
-import ReduxState from '../pages/reduxState.jsx'
-import HelloRef from '../pages/refs.jsx'
-import LifeNew from '../pages/lifeNew.jsx'
-import Life from '../pages/life.jsx'
-import StateClass from '../pages/StateClass.jsx'
-import Game from '../pages/game/'
-import Father from "../pages/fatherChild.jsx"
-import ShowList from '../pages/showList.jsx'
-import Welcome from '../pages/Welcome/index.jsx'
-import Test from "../pages/test.jsx";
+import { lazy } from 'react';
 
-// 使用Vite的?raw功能导入源代码
-import ReduxStateCode from '../pages/reduxState.jsx?raw'
-import HelloRefCode from '../pages/refs.jsx?raw'
-import LifeNewCode from '../pages/lifeNew.jsx?raw'
-import LifeCode from '../pages/life.jsx?raw'
-import StateClassCode from '../pages/StateClass.jsx?raw'
-import GameCode from '../pages/game/index.jsx?raw'
-import FatherCode from "../pages/fatherChild.jsx?raw"
-import ShowListCode from '../pages/showList.jsx?raw'
-import WelcomeCode from '../pages/Welcome/index.jsx?raw'
-import TestCode from "../pages/test.jsx?raw";
+// 动态导入组件，实现代码分割和懒加载
+const ReduxState = lazy(() => import('../pages/reduxState.jsx'));
+const HelloRef = lazy(() => import('../pages/refs.jsx'));
+const LifeNew = lazy(() => import('../pages/lifeNew.jsx'));
+const Life = lazy(() => import('../pages/life.jsx'));
+const StateClass = lazy(() => import('../pages/StateClass.jsx'));
+const Game = lazy(() => import('../pages/game/'));
+const Father = lazy(() => import('../pages/fatherChild.jsx'));
+const ShowList = lazy(() => import('../pages/showList.jsx'));
+const Welcome = lazy(() => import('../pages/Welcome/index.jsx'));
+const Test = lazy(() => import('../pages/test.jsx'));
+
+// 组件路径映射，用于动态加载源代码
+const componentSourceMap = {
+  '/redux-state': () => import('../pages/reduxState.jsx?raw'),
+  '/hello-ref': () => import('../pages/refs.jsx?raw'),
+  '/life-new': () => import('../pages/lifeNew.jsx?raw'),
+  '/life': () => import('../pages/life.jsx?raw'),
+  '/state-class': () => import('../pages/StateClass.jsx?raw'),
+  '/game': () => import('../pages/game/index.jsx?raw'),
+  '/father': () => import('../pages/fatherChild.jsx?raw'),
+  '/show-list': () => import('../pages/showList.jsx?raw'),
+  '/welcome': () => import('../pages/Welcome/index.jsx?raw'),
+  '/test': () => import('../pages/test.jsx?raw')
+};
 export const menus = [
     {
         name:'ReduxState',
         path:'/redux-state',
         component:ReduxState,
-        sourceCode: ReduxStateCode
+        getSourceCode: componentSourceMap['/redux-state']
     },{
         name:'HelloRef',
         path:'/hello-ref',
         component:HelloRef,
-        sourceCode: HelloRefCode
+        getSourceCode: componentSourceMap['/hello-ref']
     },{
         name:'LifeNew',
         path:'/life-new',
         component:LifeNew,
-        sourceCode: LifeNewCode
+        getSourceCode: componentSourceMap['/life-new']
     },{
         name:'Life',
         path:'/life',
         component:Life,
-        sourceCode: LifeCode
+        getSourceCode: componentSourceMap['/life']
     },{
         name:'StateClass',
         path:'/state-class',
         component:StateClass,
-        sourceCode: StateClassCode
+        getSourceCode: componentSourceMap['/state-class']
     },{
         name:'Game',
         path:'/game',
         component:Game,
-        sourceCode: GameCode
+        getSourceCode: componentSourceMap['/game']
     },{
         name:'Father',
         path:'/father',
         component:Father,
-        sourceCode: FatherCode
+        getSourceCode: componentSourceMap['/father']
     },{
         name:'ShowList',
         path:'/show-list',
         component:ShowList,
-        sourceCode: ShowListCode
+        getSourceCode: componentSourceMap['/show-list']
     },{
         name:'Welcome',
         path:'/welcome',
         component:Welcome,
-        sourceCode: WelcomeCode
+        getSourceCode: componentSourceMap['/welcome']
     },{
         name:'Test',
         path:'/test',
         component:Test,
-        sourceCode: TestCode
+        getSourceCode: componentSourceMap['/test']
     }
 ]
