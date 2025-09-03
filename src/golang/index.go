@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"slices"
+)
 
 /**
  * Definition for a binary tree node.
@@ -16,7 +19,7 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-//在二叉搜索树中查找第 K 小的值
+// 在二叉搜索树中查找第 K 小的值
 func kthSmallest(root *TreeNode, k int) int {
 	var stack []*TreeNode
 	node := root
@@ -37,7 +40,7 @@ func kthSmallest(root *TreeNode, k int) int {
 	return -1
 }
 
-//斐波那契数列
+// 斐波那契数列
 func fib(n int) int {
 	if n < 2 {
 		return n
@@ -49,19 +52,21 @@ func fib(n int) int {
 	return a
 }
 
+func finalString(s string) string {
+	q := [2][]byte{} // 两个 slice 背靠背，q[0] 向左，q[1] 向右
+	dir := 1
+	for _, c := range s {
+		if c == 'i' {
+			dir ^= 1 // 修改添加方向,按位异或
+		} else {
+			q[dir] = append(q[dir], byte(c))
+		}
+	}
+	fmt.Println(q)
+	slices.Reverse(q[dir^1])
+	return string(append(q[dir^1], q[dir]...))
+}
 func main() {
-	/* root := &TreeNode{Val: 8}
-	root.Left = &TreeNode{Val: 3}
-	root.Right = &TreeNode{Val: 10}
-	root.Left.Left = &TreeNode{Val: 1}
-	root.Left.Right = &TreeNode{Val: 6}
-	root.Left.Right.Left = &TreeNode{Val: 4}
-	root.Left.Right.Right = &TreeNode{Val: 7}
-	root.Right.Right = &TreeNode{Val: 14} */
-	//fmt.Println(kthSmallest(root, 3)) // 3
-	/* for i := 0; i < 8; i++ {
-		fmt.Println(fib(i))
-	} */
-	a := [...]int{1, 2, 3, 4}
-	fmt.Println(a[:2])
+	str := "striacing"
+	fmt.Printf(finalString(str))
 }
