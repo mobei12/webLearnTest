@@ -103,8 +103,25 @@ func finalString(s string) string { //输入string，输出rtsng
 	slices.Reverse(q[dir^1])
 	return string(append(q[dir^1], q[dir]...))
 }
+func Anagram(s string, t string) bool {
+	if len(s) != len(t) {
+		return false
+	}
+	seen := make(map[rune]int) //用map缓存到过的下标
+	for _, v := range s {
+		seen[v]++
+	}
+	for _, v := range t {
+		if va := seen[v]; va > 0 {
+			seen[v]--
+		} else {
+			return false
+		}
+	}
+	return true
+}
 func main() {
-	arr := []int{4, 2, 3, 0, 3, 1, 2}
-	start := 0
-	fmt.Println(BFSCanReach(arr, start))
+	s := "dda"
+	t := "add"
+	fmt.Println(Anagram(s, t))
 }
