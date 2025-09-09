@@ -1,6 +1,5 @@
-import collections
-from typing import Optional
-from collections import deque
+from collections import deque,Counter
+
 class Tree:
     def __init__(self, val, left=None, right=None):
         self.val = val
@@ -17,7 +16,10 @@ class Tree:
 #         self.val = val
 #         self.left = left
 #         self.right = right
-class Solution:
+class Algorithm:
+    def __init__(self):
+        print("Algorithm init")
+    ## 广度优先遍历，子节点是否在同一层
     def list_to_tree(self, arr):
         if not arr:
             return None
@@ -29,11 +31,10 @@ class Solution:
                 if kids: node.left = kids.pop()
                 if kids: node.right = kids.pop()
         return root
-    ## 广度优先遍历，子节点是否在同一层
     def  solve(self,root):
         if root is None:
             return True
-        Q = collections.deque([(root,0)]) #队列，存储节点和对应深度
+        Q = deque([(root,0)]) #队列，存储节点和对应深度
         depths = set()
         while len(Q) > 0 :
             cur,d = Q.popleft()
@@ -49,7 +50,7 @@ class Solution:
         if root is None:
             return []
         res = []
-        queue = collections.deque([root])
+        queue = deque([root])
         while queue:
             curLevel = []
             for _ in range(len(queue)):
@@ -102,8 +103,18 @@ class Solution:
             j -=1
             l +=1
         return True
-    
-sol = Solution()
-# Construct the binary tree: [3,1,4,None,2]
-num =12332
-print(sol.isPalindrome(num))
+    ##
+    def isAnagram(self, s: str, t: str) -> bool:
+        if len(s) != len(t):
+            return False
+        seen = dict()
+        for i in s:
+           seen[i] = seen.get(i,0)+1 #get 方法需要一个默认值，如果没有值就从0开始
+        for i in t:
+            if seen.get(i, 0) > 0:
+                seen[i] = seen.get(i,0)-1
+            else:
+                return False
+        return True
+    def isAnagramWithCounter(self,s:str,t:str)->bool:
+        return Counter(s) == Counter(t) # 自动转字典并支持多个方法
