@@ -1,6 +1,5 @@
-from algorithms import Algorithm
+from algorithms import Algorithm, KthLargest
 
 algorithm = Algorithm()
-s ='abcd'
-t ='aacd'
-print(algorithm.isAnagramWithCounter(s,t))
+
+print(algorithm.sortArray([5,1,1,2,0,0]))

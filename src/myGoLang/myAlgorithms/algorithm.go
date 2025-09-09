@@ -1,7 +1,6 @@
-package main
+package myAlgorithms
 
 import (
-	"fmt"
 	"slices"
 )
 
@@ -20,7 +19,7 @@ type TreeNode struct {
 }
 
 // 在二叉搜索树中查找第 K 小的值
-func kthSmallest(root *TreeNode, k int) int {
+func KthSmallest(root *TreeNode, k int) int {
 	var stack []*TreeNode
 	node := root
 	count := 0
@@ -41,7 +40,7 @@ func kthSmallest(root *TreeNode, k int) int {
 }
 
 // 斐波那契数列
-func fib(n int) int {
+func Fib(n int) int {
 	if n < 2 {
 		return n
 	}
@@ -90,7 +89,7 @@ func BFSCanReach(arr []int, start int) bool {
 	}
 	return false
 }
-func finalString(s string) string { //输入string，输出rtsng
+func FinalString(s string) string { //输入string，输出rtsng
 	q := [2][]byte{} // 两个 slice 背靠背，q[0] 向左，q[1] 向右
 	dir := 1
 	for _, c := range s {
@@ -120,8 +119,27 @@ func Anagram(s string, t string) bool {
 	}
 	return true
 }
-func main() {
-	s := "dda"
-	t := "add"
-	fmt.Println(Anagram(s, t))
+func SortArray(nums []int) []int {
+	if len(nums) <= 1 {
+		return nums
+	}
+	mid := len(nums) / 2
+	left := SortArray(nums[:mid])
+	right := SortArray(nums[mid:])
+	return mergeArray(left, right)
+}
+func mergeArray(leftA []int, rightA []int) []int {
+	result := make([]int, 0, len(leftA)+len(rightA))
+	l, r := 0, 0
+	for l < len(leftA) && r < len(rightA) {
+		if leftA[l] <= rightA[r] {
+			result = append(result, leftA[l])
+			l++
+		} else {
+			result = append(result, rightA[r])
+			r++
+		}
+	}
+	result = append(append(result, leftA[l:]...), rightA[r:]...)
+	return result
 }

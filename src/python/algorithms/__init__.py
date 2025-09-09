@@ -1,3 +1,3 @@
-from .my_algorithm import Algorithm
+from .my_algorithm import Algorithm, KthLargest
 
-_all_ = ["Algorithm"]
+_all_ = ["Algorithm", "KthLargest"]
