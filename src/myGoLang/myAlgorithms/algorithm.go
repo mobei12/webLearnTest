@@ -1,7 +1,9 @@
 package myAlgorithms
 
 import (
+	"fmt"
 	"slices"
+	"strings"
 )
 
 /**
@@ -119,6 +121,8 @@ func Anagram(s string, t string) bool {
 	}
 	return true
 }
+
+// 归并排序数组
 func SortArray(nums []int) []int {
 	if len(nums) <= 1 {
 		return nums
@@ -142,4 +146,66 @@ func mergeArray(leftA []int, rightA []int) []int {
 	}
 	result = append(append(result, leftA[l:]...), rightA[r:]...)
 	return result
+}
+
+// 罗马数字转整数
+func RomanToInt(s string) int {
+
+	dict := map[string]int{
+		"I":  1,
+		"V":  5,
+		"X":  10,
+		"L":  50,
+		"C":  100,
+		"D":  500,
+		"M":  1000,
+		"IV": 4,
+		"IX": 9,
+		"XL": 40,
+		"XC": 90,
+		"CD": 400,
+		"CM": 900,
+	}
+	runes := []rune(s)
+	sum := 0
+	for i := 0; i < len(runes); {
+		v := string(runes[i])
+		if string(v) == "I" || string(v) == "X" || string(v) == "C" {
+			if i+1 < len(runes) {
+				temp := v + string(runes[i+1])
+				fmt.Println(temp)
+				if val, ok := dict[temp]; ok {
+					sum += val
+					i += 1
+				} else {
+					sum += dict[v]
+				}
+			}
+		} else {
+			sum += dict[v]
+		}
+		i += 1
+	}
+
+	return sum
+}
+func IsValidParentheses(s string) bool {
+	validVal := []string{}
+	sLeft := "[({"
+	for _, v := range s {
+		vString := string(v)
+		if strings.Contains(sLeft, vString) {
+			validVal = append(validVal, vString)
+		} else if len(validVal) == 0 {
+			return false
+		} else {
+			str := validVal[len(validVal)-1]
+			if (vString == ")" && str == "(") || (vString == "}" && str == "{") || (vString == "]" && str == "[") {
+				validVal = validVal[:len(validVal)-1]
+			} else {
+				return false
+			}
+		}
+	}
+	return len(validVal) == 0
 }

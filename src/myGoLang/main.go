@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
-	sle := []int{5, 1, 1, 2, 0, 0}
-	fmt.Println(myAlgorithms.SortArray(sle))
+	s := "([)]"
+	fmt.Println(myAlgorithms.IsValidParentheses(s))
 }
