@@ -209,3 +209,27 @@ func IsValidParentheses(s string) bool {
 	}
 	return len(validVal) == 0
 }
+
+// 给定一个二叉树的 根节点 root，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。
+func RightSideView(root *TreeNode) []int {
+	if root == nil {
+		return nil
+	}
+	result := []int{}
+	nodeQue := []*TreeNode{root} // 创建并把根目录放在队列里
+	for len(nodeQue) > 0 {       //采用广度优先遍历暨层序遍历，
+		n := len(nodeQue)
+		result = append(result, nodeQue[n-1].Val) //取每一层最右边的数据返回
+		for i := 0; i < n; i++ {
+			current := nodeQue[0]
+			nodeQue = nodeQue[1:]
+			if current.Left != nil {
+				nodeQue = append(nodeQue, current.Left) //把每一个节点的子节点按照顺序放入队列，方便下一次循环使用
+			}
+			if current.Right != nil {
+				nodeQue = append(nodeQue, current.Right)
+			}
+		}
+	}
+	return result
+}
