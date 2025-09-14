@@ -3,6 +3,7 @@ package myAlgorithms
 import (
 	"fmt"
 	"slices"
+	"sort"
 	"strings"
 )
 
@@ -232,4 +233,27 @@ func RightSideView(root *TreeNode) []int {
 		}
 	}
 	return result
+}
+func DFSRightSideView(root *TreeNode) []int {
+	resMap := make(map[int]int)             //保存要返回的数据，key为层，value为每一层最右的数据
+	var dfs func(root *TreeNode, level int) //深度优先
+	dfs = func(root *TreeNode, level int) {
+		if root == nil {
+			return
+		}
+		dfs(root.Left, level+1)
+		resMap[level] = root.Val
+		dfs(root.Right, level+1)
+	}
+	dfs(root, 0)
+	keys := make([]int, 0, len(resMap))
+	for key := range resMap {
+		keys = append(keys, key)
+	}
+	sort.Ints(keys)
+	res := make([]int, 0, len(keys))
+	for _, val := range keys {
+		res = append(res, resMap[val])
+	}
+	return res
 }
