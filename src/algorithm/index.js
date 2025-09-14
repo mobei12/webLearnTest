@@ -1,13 +1,44 @@
-//爬楼梯，每次只能上1阶，或者2阶，n阶有多少种爬法
-//0->0,1->1;2->1、1,2;3->1、2,2、1,1、1、;4->1、1、1、1,1、1、2,1、2、1,2、1、1,2、2
-
-function goSteps(n) {
-  if (n < 3) return n;
-  let l = 1,
-    r = 2;
-  for (let i = 3; i <= n; i++) {
-    [l, r] = [r, l + r];//动态规划+交换法，从尾部倒推，n阶的到达方式是 (n-1)+(n-2)
-  }
-  return r;
+/**
+ * Definition for a binary tree node.
+ * class TreeNode {
+ *     val: number
+ *     left: TreeNode | null
+ *     right: TreeNode | null
+ *     constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.left = (left===undefined ? null : left)
+ *         this.right = (right===undefined ? null : right)
+ *     }
+ * }
+ */
+var TreeNode = /** @class */ (function () {
+    function TreeNode(val, left, right) {
+        this.val = val === undefined ? 0 : val;
+        this.left = left === undefined ? null : left;
+        this.right = right === undefined ? null : right;
+    }
+    return TreeNode;
+}());
+function rightSideView(root) {
+    if (!root)
+        return [];
+    var res = [];
+    var nodeQue = [root];
+    while (nodeQue.length > 0) {
+        var l = nodeQue.length;
+        res.push(nodeQue[l - 1].val);
+        for (var i = 0; i < l; i++) {
+            var current = nodeQue.shift();
+            if (current.left !== null) {
+                nodeQue.push(current.left);
+            }
+            if (current.right !== null) {
+                nodeQue.push(current.right);
+            }
+        }
+    }
+    return res;
 }
-console.log(goSteps(4));
+var root =
+[1,2,3,null,5,null,4]
+rightSideView(root)

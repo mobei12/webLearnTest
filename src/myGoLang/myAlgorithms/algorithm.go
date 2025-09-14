@@ -241,9 +241,11 @@ func DFSRightSideView(root *TreeNode) []int {
 		if root == nil {
 			return
 		}
+		dfs(root.Right, level+1)         //使用右左中遍历
+		if _, ok := resMap[level]; !ok { //右边不存在则用中间或者左边
+			resMap[level] = root.Val
+		}
 		dfs(root.Left, level+1)
-		resMap[level] = root.Val
-		dfs(root.Right, level+1)
 	}
 	dfs(root, 0)
 	keys := make([]int, 0, len(resMap))

@@ -20,5 +20,5 @@ func main() {
 			},
 		},
 	}
-	println(myAlgorithms.RightSideView(root))
+	println(myAlgorithms.DFSRightSideView(root))
 }
