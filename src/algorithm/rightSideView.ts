@@ -42,3 +42,23 @@ function rightSideView(root: TreeNode | null): number[] {
   }
   return res;
 }
+function DFSRightSideView(root:TreeNode|null):number[]{
+  if(!root) return[]
+  const res:Array<number>=[]
+  const map = new Map()
+  const dfs =(root:TreeNode|null,level=0)=>{
+    if(!root) return 
+    dfs(root.right,level+1)
+    if(!map.has(level)){
+      map.set(level,root.val)
+    }
+    dfs(root.left,level+1)
+
+  }
+  dfs(root)
+  const arr = [...map.keys()].sort((a,b)=>a-b)
+  arr.forEach(item=>{
+    res.push(map.get(item))
+  })
+  return res
+}
