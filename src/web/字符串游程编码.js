@@ -37,3 +37,6 @@ function sr2(s) {
 const str = "aaabccca";
 const str2 = "aabbcccaa";
 console.log(sr2(str2));
+console.log(sr2("aaabbc")); // a3b2c1
+console.log(sr2("abcd"));   // abcd (压缩后不短)
+console.log(sr2(""));       // ""
