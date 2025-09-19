@@ -1,39 +1,17 @@
-function sr(s) {
-  const sTemp = [];
-  let lastIndex = Infinity;
+const arrSort = (arr) => {
+  if (arr.length < 2) return arr;
+  for (let i = 0; i < arr.length - 1; i++) {
+    let swapped = false;
+    for (let j = 0; j < arr.length - 1 - i; j++) {
+      if (arr[j] > arr[j + 1]) {//确保把当次的最大值换到最后
+        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+        swapped = true;
+      }
+    }
+    if (!swapped) break; // 某一轮没有发生交换，说明数组已经有序，可以提前结束
+  }
+  console.log(arr);
+};
 
-  for (let i = 0; i < s.length; i++) {
-    if (sTemp.length >= 2) {
-      lastIndex = sTemp.length - 2;
-    }
-    const element = s[i];
-    console.log(sTemp, sTemp.length, sTemp[lastIndex]);
-    if (sTemp[lastIndex] && sTemp[lastIndex] === element) {
-      sTemp[lastIndex + 1] = sTemp[lastIndex + 1] + 1;
-    } else {
-      sTemp.push(element, 1);
-    }
-  }
-
-  if (sTemp.length >= s.length) {
-    return s;
-  } else {
-    return sTemp.join("");
-  }
-}
-function sr2(s) {
-  let str = "",
-    no = 1;
-  for (let i = 1; i <= s.length; i++) {
-    if (s[i] === s[i - 1]) {
-      no++;
-    } else {
-      str += s[i - 1] + no;
-      no = 1;
-    }
-  }
-  return str.length >= s.length ? s : str;
-}
-const str = "aaabccca";
-const str2 = "aabbcccaa";
-console.log(sr2(str2));
+const arr = [1, 19, 9, 10, 2, 3];
+arrSort(arr);

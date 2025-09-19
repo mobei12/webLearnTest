@@ -107,13 +107,13 @@ class Algorithm:
     ## 回文数
     def isPalindrome(self, x: int) -> bool:
         s = str(x)
-        l, j = 0, len(s) - 1
+        lenJ, j = 0, len(s) - 1
 
-        while l < j:
-            if s[j] != s[l]:
+        while lenJ < j:
+            if s[j] != s[lenJ]:
                 return False
             j -= 1
-            l += 1
+            lenJ += 1
         return True
 
     ## 给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的 字母异位词。  s = "rat", t = "car" false
@@ -144,17 +144,26 @@ class Algorithm:
 
     def mergeArray(self, leftArr: List[int], rightArr: List[int]) -> List[int]:
         result = []
-        l = r = 0
-        while l < len(leftArr) and r < len(rightArr):
-            if leftArr[l] < rightArr[r]:
-                result.append(leftArr[l])
-                l += 1
+        leftI = r = 0
+        while leftI < len(leftArr) and r < len(rightArr):
+            if leftArr[leftI] < rightArr[r]:
+                result.append(leftArr[leftI])
+                leftI += 1
             else:
                 result.append(rightArr[r])
                 r += 1
-        result.extend(leftArr[l:])
+        result.extend(leftArr[leftI:])
         result.extend(rightArr[r:])
         return result
+
+    def makeGood(self, s: str) -> str:
+        stack = []
+        for temp in s:
+            if stack and stack[-1].lower() == temp.lower() and stack[-1] != temp:
+                stack.pop()
+            else:
+                stack.append(temp)
+        return "".join(stack)
 
 
 class KthLargest:

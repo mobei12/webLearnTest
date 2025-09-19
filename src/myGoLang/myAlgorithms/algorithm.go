@@ -259,3 +259,80 @@ func DFSRightSideView(root *TreeNode) []int {
 	}
 	return res
 }
+
+func BubbleSort(arr []int) []int {
+	l := len(arr)
+	if len(arr) < 2 {
+		return arr
+	}
+	for i := 0; i < l-1; i++ {
+		swapped := false
+		for j := 0; j < l-i-1; j++ {
+			if arr[j] > arr[j+1] {
+				arr[j], arr[j+1] = arr[j+1], arr[j]
+				swapped = true
+			}
+		}
+		if !swapped {
+			break
+		}
+	}
+	return arr
+}
+func quickSort(nums []int) []int {
+	if len(nums) < 2 {
+		return nums
+	}
+	leftArr, rightArr, midArr, mid := []int{}, []int{}, []int{}, len(nums)/2
+	for i := 0; i < len(nums); i++ {
+		if nums[i] < nums[mid] {
+			leftArr = append(leftArr, nums[i])
+		} else if nums[i] > nums[mid] {
+			rightArr = append(rightArr, nums[i])
+		} else {
+			midArr = append(midArr, nums[i])
+		}
+	}
+	return append(append(quickSort(leftArr), nums[mid]), quickSort(rightArr)...)
+}
+
+// LCR 119. 最长连续序列
+func LongestConsecutive(nums []int) int {
+	temp := quickSort(nums)
+	maxNumber := 1
+	leftIndex := 0
+	for i := 1; i < len(temp); i++ {
+		if temp[i]-temp[i-1] > 1 {
+			leftIndex = i
+		} else {
+			if i-leftIndex+1 > maxNumber {
+				maxNumber = i - leftIndex + 1
+			}
+		}
+
+	}
+	return maxNumber
+}
+
+// 整理字符串1544
+func MakeGood(s string) string {
+	if len(s) < 2 {
+		return s
+	}
+	i := 0
+	for i < len(s)-1 {
+		beforeS := strings.ToLower(string(s[i]))
+		afterS := strings.ToLower(string(s[i+1]))
+		if beforeS == afterS && s[i] != s[i+1] {
+			// 删除这一对字符
+			s = s[:i] + s[i+2:]
+			// 回退一位，避免漏掉情况
+			if i > 0 {
+				i--
+			}
+		} else {
+			i++
+		}
+	}
+	return s
+}
