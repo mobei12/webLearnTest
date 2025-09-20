@@ -21,7 +21,7 @@ func main() {
 			},
 		},
 	} */
-	arr := []int{100, 4, 200, 1, 3, 2}
-	fmt.Printf("%v\n", myAlgorithms.LongestConsecutive(arr)) // [1 2 3 4 5]
+	arr := []int{3, -2}
+	fmt.Printf("%v\n", myAlgorithms.RADSort(arr)) // [1 2 3 4 5]
 
 }

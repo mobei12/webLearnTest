@@ -296,6 +296,35 @@ func quickSort(nums []int) []int {
 	return append(append(quickSort(leftArr), nums[mid]), quickSort(rightArr)...)
 }
 
+// 正整数基数排序
+func RADSort(nums []int) []int {
+	if len(nums) == 0 {
+		return nums
+	}
+	barrels := make([][]int, 10)
+	numsL := len(nums)
+	for divisor := 1; ; divisor *= 10 {
+		for _, val := range nums {
+			index := (val / divisor) % 10
+			barrels[index] = append(barrels[index], val)
+		}
+		_nums := make([]int, 0, numsL)
+		nowEmptyBuckets := 0
+		for i := 0; i < 10; i++ {
+			if len(barrels[i]) > 0 {
+				nowEmptyBuckets++
+				_nums = append(_nums, barrels[i]...)
+				barrels[i] = barrels[i][:0]
+			}
+		}
+		nums = _nums
+		if nowEmptyBuckets == 1 {
+			break
+		}
+	}
+	return nums
+}
+
 // LCR 119. 最长连续序列
 func LongestConsecutive(nums []int) int {
 	temp := quickSort(nums)
