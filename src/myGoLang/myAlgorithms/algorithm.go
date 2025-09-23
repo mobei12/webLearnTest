@@ -2,6 +2,7 @@ package myAlgorithms
 
 import (
 	"fmt"
+	"math"
 	"slices"
 	"sort"
 	"strings"
@@ -301,41 +302,91 @@ func RADSort(nums []int) []int {
 	if len(nums) == 0 {
 		return nums
 	}
+
+	// 计算最大值（用于决定循环轮数）
+	maxVal := nums[0]
+	for _, v := range nums {
+		if v > maxVal {
+			maxVal = v
+		}
+	}
+
 	barrels := make([][]int, 10)
 	numsL := len(nums)
-	for divisor := 1; ; divisor *= 10 {
+
+	// 从个位开始，按位处理，直到 maxVal/divisor == 0 为止
+	for divisor := 1; maxVal/divisor > 0; divisor *= 10 {
+		// 分桶
 		for _, val := range nums {
 			index := (val / divisor) % 10
 			barrels[index] = append(barrels[index], val)
 		}
-		_nums := make([]int, 0, numsL)
-		nowEmptyBuckets := 0
+
+		// 收集并清空桶
+		newNums := make([]int, 0, numsL)
 		for i := 0; i < 10; i++ {
 			if len(barrels[i]) > 0 {
-				nowEmptyBuckets++
-				_nums = append(_nums, barrels[i]...)
+				newNums = append(newNums, barrels[i]...)
 				barrels[i] = barrels[i][:0]
 			}
 		}
-		nums = _nums
-		if nowEmptyBuckets == 1 {
-			break
-		}
+		nums = newNums
 	}
 	return nums
 }
 
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+func MiddleNode(head *ListNode) *ListNode {
+	f, s := head, head
+	for f != nil && f.Next != nil {
+		f = f.Next.Next
+		s = s.Next
+	}
+	return s
+}
+func MaxSubArray(nums []int) int {
+	res := -math.MaxInt
+	cur := 0
+	for _, i := range nums {
+		if i > cur+i {
+			cur = i
+		} else {
+			cur = cur + i
+		}
+		if cur > res {
+			res = cur
+		}
+	}
+	return res
+}
+
 // LCR 119. 最长连续序列
 func LongestConsecutive(nums []int) int {
-	temp := quickSort(nums)
+	temp := RADSort(nums)
 	maxNumber := 1
 	leftIndex := 0
+	repeat := 0
 	for i := 1; i < len(temp); i++ {
+		fmt.Println(temp[i-1], temp[i])
 		if temp[i]-temp[i-1] > 1 {
 			leftIndex = i
+			repeat = 0
+		} else if temp[i]-temp[i-1] == 0 {
+			repeat += 1
 		} else {
-			if i-leftIndex+1 > maxNumber {
-				maxNumber = i - leftIndex + 1
+			if i-leftIndex+1-repeat > maxNumber {
+				maxNumber = i - leftIndex - repeat + 1
 			}
 		}
 

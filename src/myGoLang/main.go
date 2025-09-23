@@ -21,7 +21,7 @@ func main() {
 			},
 		},
 	} */
-	arr := []int{3, -2}
-	fmt.Printf("%v\n", myAlgorithms.RADSort(arr)) // [1 2 3 4 5]
+	arr := []int{-2, 1, -3, 4, -1, 2, 1, -5, 4}
+	fmt.Printf("%v\n", myAlgorithms.MaxSubArray(arr)) // [1 2 3 4 5]
 
 }

@@ -1,13 +1,16 @@
 from collections import deque, Counter
-from typing import List
-
+from typing import List, Optional
 
 class Tree:
     def __init__(self, val, left=None, right=None):
         self.val = val
         self.left = left
         self.right = right
-
+#Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 # class Tree:
 #   def__init__(self,val,left=None,right=None):
@@ -164,6 +167,12 @@ class Algorithm:
             else:
                 stack.append(temp)
         return "".join(stack)
+    def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        f=s=head##快慢指针，一个走一步一个两步
+        while f and f.next:
+            s = s.next
+            f = f.next.next
+        return s
 
 
 class KthLargest:
