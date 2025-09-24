@@ -21,7 +21,7 @@ func main() {
 			},
 		},
 	} */
-	arr := []int{-2, 1, -3, 4, -1, 2, 1, -5, 4}
-	fmt.Printf("%v\n", myAlgorithms.MaxSubArray(arr)) // [1 2 3 4 5]
+	arr := []string{"eat", "tea", "tan", "ate", "nat", "bat"}
+	fmt.Printf("%v\n", myAlgorithms.GroupAnagrams(arr)) // [1 2 3 4 5]
 
 }

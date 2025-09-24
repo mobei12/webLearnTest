@@ -347,6 +347,7 @@ type ListNode struct {
 	Next *ListNode
 }
 
+// 链表中间节点
 func MiddleNode(head *ListNode) *ListNode {
 	f, s := head, head
 	for f != nil && f.Next != nil {
@@ -355,11 +356,12 @@ func MiddleNode(head *ListNode) *ListNode {
 	}
 	return s
 }
+
+// 数组最大子序和（Kadane’s 算法）
 func MaxSubArray(nums []int) int {
-	res := -math.MaxInt
-	cur := 0
+	cur, res := 0, -math.MaxInt
 	for _, i := range nums {
-		if i > cur+i {
+		if i > cur+i { //如果当前累加和小于当前数字，则用当前数字重置累加和
 			cur = i
 		} else {
 			cur = cur + i
@@ -367,6 +369,56 @@ func MaxSubArray(nums []int) int {
 		if cur > res {
 			res = cur
 		}
+	}
+	return res
+}
+
+// 买卖股票（Kadane’s 算法）
+func MaxProfit(prices []int) int {
+	if len(prices) <= 1 {
+		return 0
+	}
+	cur, res := 0, 0
+	for i := 1; i < len(prices); i++ {
+		temp := prices[i] - prices[i-1]
+		fmt.Println(temp, cur, res)
+		if cur+temp > 0 { //和大于0累加
+			cur = temp + cur
+		} else { //小于等于0，重置当前cur
+			cur = 0
+		}
+		if cur > res {
+			res = cur
+		}
+	}
+	return res
+}
+
+// 字母异位词分组
+func GroupAnagrams(strs []string) [][]string {
+	ans := make(map[string][]string)
+
+	for _, val := range strs {
+		// 用 [26]int 统计字母频次
+		var d [26]int
+		for i := 0; i < len(val); i++ {
+			d[val[i]-'a']++
+		}
+
+		// 把数组转成 string 作为 key
+		// fmt.Sprint(d) 也行，但会多空格，这里直接手写序列化
+		key := make([]byte, 0, 26*2)
+		for _, count := range d {
+			key = append(key, byte(count), ',')
+		}
+
+		ans[string(key)] = append(ans[string(key)], val)
+	}
+
+	// map 转 slice
+	res := make([][]string, 0, len(ans))
+	for _, v := range ans {
+		res = append(res, v)
 	}
 	return res
 }
