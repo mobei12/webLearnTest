@@ -21,7 +21,7 @@ func main() {
 			},
 		},
 	} */
-	arr := []string{"eat", "tea", "tan", "ate", "nat", "bat"}
-	fmt.Printf("%v\n", myAlgorithms.GroupAnagrams(arr)) // [1 2 3 4 5]
+	arr := []int{10, 9, 2, 5, 3, 7, 101, 18}
+	fmt.Printf("%v\n", myAlgorithms.LengthOfLIS(arr)) // [1 2 3 4 5]
 
 }

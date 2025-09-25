@@ -423,6 +423,20 @@ func GroupAnagrams(strs []string) [][]string {
 	return res
 }
 
+func LengthOfLIS(nums []int) int {
+	nL := len(nums)
+	dp := make([]int, nL)
+
+	for i := range nL {
+		for j := range i {
+			if nums[j] < nums[i] {
+				dp[i] = max(dp[i], (dp[j] + 1))
+			}
+		}
+	}
+	return slices.Max(dp) + 1
+}
+
 // LCR 119. 最长连续序列
 func LongestConsecutive(nums []int) int {
 	temp := RADSort(nums)
