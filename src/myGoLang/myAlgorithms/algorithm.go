@@ -423,6 +423,7 @@ func GroupAnagrams(strs []string) [][]string {
 	return res
 }
 
+// [最长递增子序列](https://leetcode.cn/problems/longest-increasing-subsequence/)
 func LengthOfLIS(nums []int) int {
 	nL := len(nums)
 	dp := make([]int, nL)
@@ -435,6 +436,34 @@ func LengthOfLIS(nums []int) int {
 		}
 	}
 	return slices.Max(dp) + 1
+}
+
+/*
+O(N*logN)
+2分➕贪心算法
+输入：0, 1, 0, 3, 2, 3
+输出：
+[0]
+[0 1]
+[0 1]
+[0 1 3]
+[0 1 2]
+[0 1 2 3]
+*/
+func LengthOfLog(nums []int) int {
+	var dp []int
+	for _, num := range nums {
+		//下标对应的数，小于当前index，就直接替换，等于就加入
+		i := sort.Search(len(dp), func(i int) bool { // 找到第一个 >= num 的位置 (bisect_left)
+			return dp[i] >= num
+		})
+		if i == len(dp) { //dp切片长度等于i，说明要往后面加
+			dp = append(dp, num)
+		} else {
+			dp[i] = num
+		}
+	}
+	return len(dp)
 }
 
 // LCR 119. 最长连续序列
