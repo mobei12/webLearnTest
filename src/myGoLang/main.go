@@ -21,6 +21,6 @@ func main() {
 			},
 		},
 	} */
-	arr := []int{0, 1, 0, 3, 2, 3}
-	fmt.Printf("%v\n", myAlgorithms.LengthOfLog(arr)) // [1 2 3 4 5]
+	arr := []int{1, 1, 1, 1, 1}
+	fmt.Printf("%v\n", myAlgorithms.RunningSum(arr)) // [1 2 3 4 5]
 }

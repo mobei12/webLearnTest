@@ -465,6 +465,60 @@ func LengthOfLog(nums []int) int {
 	}
 	return len(dp)
 }
+func TwoOutOfThree(nums1 []int, nums2 []int, nums3 []int) []int {
+	var ans []int
+	mapD := make(map[int]int)
+	for _, i := range nums1 {
+		if va := mapD[i]; va == 0 {
+			mapD[i] = 1
+		}
+	}
+	mapD1 := make(map[int]int)
+	for _, i := range nums2 {
+		if va := mapD1[i]; va == 0 {
+			mapD1[i] = 1
+		}
+	}
+	mapD2 := make(map[int]int)
+	for _, i := range nums3 {
+		if va := mapD2[i]; va == 0 {
+			mapD2[i] = 1
+		}
+	}
+	for key, v := range mapD1 {
+		if _, ok := mapD[key]; ok {
+			mapD[key] += 1
+		} else {
+			mapD[key] = v
+		}
+	}
+	for key, v := range mapD2 {
+		if _, ok := mapD[key]; ok {
+			mapD[key] += 1
+		} else {
+			mapD[key] = v
+		}
+	}
+
+	for key, v := range mapD {
+		if v >= 2 {
+			ans = append(ans, key)
+		}
+	}
+	return ans
+
+}
+
+// 1480. 一维数组的动态和
+func RunningSum(nums []int) []int {
+	total := 0
+	ans := make([]int, len(nums))
+	for i, val := range nums {
+		total += val
+		ans[i] = total
+	}
+	return ans
+}
 
 // LCR 119. 最长连续序列
 func LongestConsecutive(nums []int) int {
