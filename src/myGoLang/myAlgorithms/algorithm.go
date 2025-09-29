@@ -511,11 +511,24 @@ func TwoOutOfThree(nums1 []int, nums2 []int, nums3 []int) []int {
 
 // 1480. 一维数组的动态和
 func RunningSum(nums []int) []int {
-	total := 0
-	ans := make([]int, len(nums))
-	for i, val := range nums {
-		total += val
-		ans[i] = total
+	for i := 1; i < len(nums); i++ {
+		nums[i] += nums[i-1]
+	}
+	return nums
+}
+
+// 867. 转置矩阵
+func Transpose(matrix [][]int) [][]int {
+	row := len(matrix)
+	col := len(matrix[0])
+	ans := make([][]int, row*col)
+	for i := range ans {
+		ans[i] = make([]int, row) // 每一行长度 row
+	}
+	for i := 0; i < row; i++ {
+		for j := 0; j < col; j++ {
+			ans[j][i] = matrix[i][j]
+		}
 	}
 	return ans
 }

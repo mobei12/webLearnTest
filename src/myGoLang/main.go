@@ -21,6 +21,6 @@ func main() {
 			},
 		},
 	} */
-	arr := []int{1, 1, 1, 1, 1}
-	fmt.Printf("%v\n", myAlgorithms.RunningSum(arr)) // [1 2 3 4 5]
+	arr := [][]int{{1, 2, 3}, {4, 5, 6}}
+	fmt.Printf("%v\n", myAlgorithms.Transpose(arr)) // [1 2 3 4 5]
 }
