@@ -53,6 +53,17 @@ func Fib(n int) int {
 		a, b = b, a+b
 	}
 	return a
+} // 斐波那契数列,模运算
+func FibMod(n int) int {
+	if n < 2 {
+		return n
+	}
+	const MOD = 1000000007
+	a, b := 1, 1
+	for i := 2; i <= n; i++ {
+		a, b = b, (a+b)%MOD
+	}
+	return a
 }
 
 // https://leetcode.cn/problems/jump-game-iii/
@@ -280,21 +291,21 @@ func BubbleSort(arr []int) []int {
 	}
 	return arr
 }
-func quickSort(nums []int) []int {
-	if len(nums) < 2 {
-		return nums
+func quickSort(numS []int) []int {
+	if len(numS) < 2 {
+		return numS
 	}
-	leftArr, rightArr, midArr, mid := []int{}, []int{}, []int{}, len(nums)/2
-	for i := 0; i < len(nums); i++ {
-		if nums[i] < nums[mid] {
-			leftArr = append(leftArr, nums[i])
-		} else if nums[i] > nums[mid] {
-			rightArr = append(rightArr, nums[i])
+	leftArr, rightArr, midArr, mid := []int{}, []int{}, []int{}, len(numS)/2
+	for i := 0; i < len(numS); i++ {
+		if numS[i] < numS[mid] {
+			leftArr = append(leftArr, numS[i])
+		} else if numS[i] > numS[mid] {
+			rightArr = append(rightArr, numS[i])
 		} else {
-			midArr = append(midArr, nums[i])
+			midArr = append(midArr, numS[i])
 		}
 	}
-	return append(append(quickSort(leftArr), nums[mid]), quickSort(rightArr)...)
+	return append(append(quickSort(leftArr), midArr...), quickSort(rightArr)...)
 }
 
 // 正整数基数排序
@@ -577,4 +588,25 @@ func MakeGood(s string) string {
 		}
 	}
 	return s
+}
+
+func FindErrorNums(nums []int) []int {
+	n := len(nums)
+	freq := make([]int, n+1)
+
+	for _, v := range nums {
+		freq[v]++
+	}
+
+	dup, miss := 0, 0
+	for i := 1; i <= n; i++ {
+		if freq[i] == 2 {
+			dup = i
+		}
+		if freq[i] == 0 {
+			miss = i
+		}
+	}
+
+	return []int{dup, miss}
 }
