@@ -610,3 +610,10 @@ func FindErrorNums(nums []int) []int {
 
 	return []int{dup, miss}
 }
+func NumWaterBottles(numBottles int, numExchange int) int {
+	if numBottles < numExchange {
+		return numBottles
+	}
+	n, e := numBottles/numExchange, numBottles%numExchange
+	return numBottles - e + NumWaterBottles(n+e, numExchange)
+}
