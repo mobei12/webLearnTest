@@ -22,5 +22,5 @@ func main() {
 		},
 	} */
 	//arr := []int{2, 2}
-	fmt.Printf("%v\n", myAlgorithms.NumWaterBottles(9, 2)) // [1 2 3 4 5]
+	fmt.Printf("%v\n", myAlgorithms.MaxBottlesDrunk(13, 6)) // [1 2 3 4 5]
 }

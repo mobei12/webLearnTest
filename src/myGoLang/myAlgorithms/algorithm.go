@@ -617,3 +617,13 @@ func NumWaterBottles(numBottles int, numExchange int) int {
 	n, e := numBottles/numExchange, numBottles%numExchange
 	return numBottles - e + NumWaterBottles(n+e, numExchange)
 }
+
+func MaxBottlesDrunk(numBottles int, numExchange int) int {
+	ans := numBottles
+	for numBottles >= numExchange {
+		numBottles = numBottles - numExchange + 1
+		ans += 1
+		numExchange += 1
+	}
+	return ans
+}
